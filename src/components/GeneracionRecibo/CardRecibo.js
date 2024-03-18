@@ -100,9 +100,9 @@ function CardRecibo(props) {
     const [montoFijo, setMontoFijo] = useState(0);
     const [aplicoDescuento, setAplicoDescuento] = useState(false);
     const [isConfirmed, setIsConfirmed] = useState(false);
-    const [validacionRTN, setValidacionRTN] = useState(false)
+    const [validacionDUI, setvalidacionDUI] = useState(false)
     const [miniLoader, setMiniLoader] = useState(false)
-    const [validacionDNI, setValidacionDNI] = useState(false)
+    const [validacionNIT, setvalidacionNIT] = useState(false)
     const [validacionPSPT, setValidacionPSPT] = useState(false)
     const [recibo, setRecibo] = useState({
         identificacion: "",
@@ -157,7 +157,7 @@ function CardRecibo(props) {
     }
     const handleSubmit = async (e) => {
 
-        if (servicio.id !== "" && recibo.identificacion !== "" && recibo.regionalId !== "" && recibo.tipoIdentificadorId !== "" && recibo.nombreRazon !== "" && (!validacionDNI && !validacionPSPT && !validacionRTN && isConfirmed)) {
+        if (servicio.id !== "" && recibo.identificacion !== "" && recibo.regionalId !== "" && recibo.tipoIdentificadorId !== "" && recibo.nombreRazon !== "" && (!validacionNIT && !validacionPSPT && !validacionDUI && isConfirmed)) {
             setMiniLoader(true);
             e.preventDefault();
 
@@ -233,19 +233,19 @@ function CardRecibo(props) {
         let valorModificado = value.replace(/-/g, "");
 
         if (recibo.tipoIdentificadorId == 5 && valorModificado.length <= 14) {
-            //RTN
-            if (valorModificado.length != 14 && valorModificado.length <= 13) {
-                setValidacionRTN(true);
+            //NIT
+            if (valorModificado.length != 14 && valorModificado.length <= 14) {
+                setvalidacionDUI(true);
             } else {
-                setValidacionRTN(false);
+                setvalidacionDUI(false);
             }
             setRecibo({ ...recibo, identificacion: valorModificado })
-        } else if (recibo.tipoIdentificadorId == 3 && valorModificado.length <= 13) {
-            //DNI
-            if (valorModificado.length != 13 && valorModificado.length <= 13) {
-                setValidacionDNI(true);
+        } else if (recibo.tipoIdentificadorId == 3 && valorModificado.length <= 9) {
+            //DUI
+            if (valorModificado.length != 9 && valorModificado.length <= 9) {
+                setvalidacionNIT(true);
             } else {
-                setValidacionDNI(false);
+                setvalidacionNIT(false);
             }
             setRecibo({ ...recibo, identificacion: valorModificado })
         } else if (recibo.tipoIdentificadorId == 4 && valorModificado.length <= 20) {
@@ -269,9 +269,9 @@ function CardRecibo(props) {
         setMontoTotal(0);
     }
     const cambiarTipoIdentificador = () => {
-        setValidacionDNI(false);
+        setvalidacionNIT(false);
         setValidacionPSPT(false);
-        setValidacionRTN(false);
+        setvalidacionDUI(false);
 
     }
 
@@ -637,7 +637,7 @@ function CardRecibo(props) {
                     <div className="containerL">
                         <div className="contactL-box">
                             <div className="contactL-form">
-                                <h3 className="fs-3">Generación de Recibo TGR-1</h3>
+                                <h3 className="fs-3">Generación de Recibo del Servicio</h3>
 
                                 <CRow className="rowL mt-3 mb-3">
                                     <CCol >
@@ -657,15 +657,15 @@ function CardRecibo(props) {
                                     </CCol>
                                     <CCol >
                                         <CFormLabel className='textL' >Identificador
-                                            {validacionRTN && (
+                                            {validacionDUI && (
                                                 <small className=" ms-2 text-danger">
-                                                    {"(RTN debe de tener 14 digitos)"}
+                                                    {"(NIT debe de tener 14 digitos)"}
                                                 </small>
                                             )}
-                                            {validacionDNI && (
+                                            {validacionNIT && (
                                                 <small className=" ms-2 text-danger">
 
-                                                    {"(DNI debe de tener 13 digitos)"}
+                                                    {"(DUI debe de tener 9 digitos)"}
                                                 </small>
                                             )}
                                             {validacionPSPT && (
@@ -917,7 +917,7 @@ function CardRecibo(props) {
                                                 type="checkbox"
                                                 id="invalidCheck"
                                                 ref={(element) => { ref.current[0] = element }}
-                                                label="Confirmo que he revisado toda la información ingresada y que los detalles del recibo TGR-1 corresponden al servicio que se ha solicitado."
+                                                label="Confirmo que he revisado toda la información ingresada y que los detalles del recibo que corresponden al servicio que se ha solicitado."
                                                 required
                                                 value={isConfirmed}
                                                 onChange={checkboxvalue}
