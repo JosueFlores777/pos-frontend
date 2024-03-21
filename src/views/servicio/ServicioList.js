@@ -62,26 +62,26 @@ const CatalogoList = (props) => {
     }
     const colDef = [
         {
-            header: "Código",
+            header: "Código Nuevo",
             render(row) {
 
                 return row.codigo;
             },
         },
         {
-            header: "Nombre Servicio",
+            header: "Nombre del Servicio",
             render(row) {
                 return row.nombreServicio;
             },
         },
         {
-            header: "Nombre SubServicio",
+            header: "Nombre del SubServicio",
             render(row) {
                 return row.nombreSubServicio;
             },
         },
         {
-            header: "Estado",
+            header: "Estado Actual",
             render(row, props) {
 
                 if (row.verificado) {

@@ -127,25 +127,25 @@ const ReciboList = (props) => {
   }
   const colDef = [
     { header: "Número Recibo", field: "id" },
+    // {
+    //   header: "Estado Senasa",
+    //   render(row, props) {
+    //     if (row.estadoSenasaId == 6) {
+    //       return <CBadge className='bg-info-2' shape="rounded-pill" >Creado</CBadge>;
+    //     } else if (row.estadoSenasaId == 7) {
+    //       return <CBadge className='bg-success-2' shape="rounded-pill"  >Pagado</CBadge>;
+    //     } else if (row.estadoSenasaId == 8) {
+    //       return <CBadge className='bg-dark-2' shape="rounded-pill"  >Procesado</CBadge>;
+    //     } else if (row.estadoSenasaId == 9) {
+    //       return <CBadge className='bg-dark-2' shape="rounded-pill"  >Utilizado</CBadge>;
+    //     } else if (row.estadoSenasaId == 10) {
+    //       return <CBadge className='bg-dark-2' shape="rounded-pill"  >Solicitado</CBadge>;
+    //     }
+    //     return <CBadge className='bg-danger-2' shape="rounded-pill"  >Anulado</CBadge>;
+    //   },
+    // },
     {
-      header: "Estado Senasa",
-      render(row, props) {
-        if (row.estadoSenasaId == 6) {
-          return <CBadge className='bg-info-2' shape="rounded-pill" >Creado</CBadge>;
-        } else if (row.estadoSenasaId == 7) {
-          return <CBadge className='bg-success-2' shape="rounded-pill"  >Pagado</CBadge>;
-        } else if (row.estadoSenasaId == 8) {
-          return <CBadge className='bg-dark-2' shape="rounded-pill"  >Procesado</CBadge>;
-        } else if (row.estadoSenasaId == 9) {
-          return <CBadge className='bg-dark-2' shape="rounded-pill"  >Utilizado</CBadge>;
-        } else if (row.estadoSenasaId == 10) {
-          return <CBadge className='bg-dark-2' shape="rounded-pill"  >Solicitado</CBadge>;
-        }
-        return <CBadge className='bg-danger-2' shape="rounded-pill"  >Anulado</CBadge>;
-      },
-    },
-    {
-      header: "Estado Sefin",
+      header: "Estado ",//Sefin
       render(row, props) {
         if (row.estadoSefinId == 6) {
           return <CBadge className='bg-info-2' shape="rounded-pill" >Creado</CBadge>;
@@ -162,7 +162,7 @@ const ReciboList = (props) => {
       },
     },
     { header: "Identificador", field: "identificacion" },
-    { header: "Nombre O Razón Social", field: "nombreRazon" },
+    { header: "Razón Social", field: "nombreRazon" },
     {
       header: "Monto",
       render(row, props) {
@@ -263,7 +263,8 @@ const ReciboList = (props) => {
                 </CInputGroup>
               </CCol>
               <CCol md={3} >
-                <CFormLabel>Estado Senasa</CFormLabel>
+                
+                <CFormLabel>Estado Proceso</CFormLabel> {/* Estado Senasa */}
                 <CInputGroup className="mb-3 search-table ">
                   <CFormSelect
                     className="contactL-input"
@@ -277,7 +278,7 @@ const ReciboList = (props) => {
                 </CInputGroup>
               </CCol>
               <CCol md={3} >
-                <CFormLabel>Estado Sefin</CFormLabel>
+                <CFormLabel>Estado Pago</CFormLabel>{/* Sefin */}
                 <CInputGroup className="mb-3 search-table ">
                   <CFormSelect
                     className="contactL-input"
