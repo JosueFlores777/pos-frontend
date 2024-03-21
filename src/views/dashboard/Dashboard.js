@@ -674,7 +674,7 @@ const Dashboard = () => {
                               <CSpinner className='ms-2' size='sm' />
                             )}
                             {!miniLoading && (
-                              "L. " + state.montoTotal
+                              "$ " + state.montoTotal
                             )}
                           </div>
                         </div>
