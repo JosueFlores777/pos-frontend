@@ -521,11 +521,11 @@
 }
 .btn-blue {
 
-  --cui-btn-shadow: #00BEE4;
+  --cui-btn-shadow: #0801e2;
   font-weight: 500;
   color: #F7F7F7;
-  background-color: #01BDE2;
-  border: 1px solid #00BEE4;
+  background-color: #0801e2;
+  border: 1px solid #00bee4;
   text-decoration: none !important;
 
   display: flex;
@@ -535,27 +535,27 @@
   transition: 0.1s ease-in-out;
 
   &:hover {
-    border-color: #00BEE4;
+    border-color: #e20101f3;
     color: #F7F7F7;
     box-shadow: 3px 5px 7px #333;
-    background-color: #01BDE2;
+    background-color: #e20101;
   }
 
   &:focus {
-    border-color: #00BEE4;
+    border-color: #0801e29f;
     color: #F7F7F7;
     box-shadow: none;
-    background-color: #00BEE4;
+    background-color: #0801e29f;
 
     &:hover {
-      border-color: #00BEE4;
+      border-color: #0801e29f;
       color: #F7F7F7;
       box-shadow: 3px 5px 7px #333;
-      background-color: #01BDE2;
+      background-color: #0801e29f;
 
       &:active {
-        border-color: #00BEE4;
-        color: #00BEE4;
+        border-color: #0801e29f;
+        color: #0801e29f;
         box-shadow: 3px 5px 7px #333;
         background-color: #F7F7F7;
       }

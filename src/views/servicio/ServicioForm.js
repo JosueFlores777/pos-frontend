@@ -23,9 +23,9 @@ const CatalogoForm = ({ onSubmit, ...props }) => {
             start: 0,
             nombreServicio: "",
             nombreSubServicio: "",
-            categoriaId: "",
-            tipoServicioId: "",
-            departamentoId: "",
+            categoriaId: "1",
+            tipoServicioId: "1",
+            departamentoId: "1",
             areaId: "",
             tipoCobroId: "",
             monto: "",
@@ -232,6 +232,22 @@ const CatalogoForm = ({ onSubmit, ...props }) => {
                                         <CFormFeedback invalid className='ms-3'>Ingresa una descripcion.</CFormFeedback>
                                     </CInputGroup>
                                 </CCol>
+                                <CCol md={6}>
+                                    <CFormLabel>Área</CFormLabel>
+                                    <CFormSelect
+                                        className="contactL-input"
+                                        disabled={props.soloLectura || props.soloVerificar}
+                                        required
+                                        options={areaCatalogos}
+                                        id="areaId"
+                                        value={state.areaId}
+                                        onChange={e =>
+                                            setState({ ...state, areaId: e.target.value })
+                                        }
+                                    />
+                                    <CFormFeedback invalid className='ms-3'>Ingresa un tipo de Area.</CFormFeedback>
+                                </CCol>
+                              {/*
                                 <CCol md={6} className="mt-2">
                                     <CFormLabel>Departamento</CFormLabel>
                                     <CFormSelect
@@ -248,7 +264,13 @@ const CatalogoForm = ({ onSubmit, ...props }) => {
                                     />
                                     <CFormFeedback invalid className='ms-3'>Ingresa un departamento.</CFormFeedback>
                                 </CCol>
+                              
+                              */}
                             </CRow>
+                          
+
+                          {/* 
+                          
                             <CRow className='mb-2 '>
                                 <CCol md={6}>
                                     <CFormLabel>Categoría</CFormLabel>
@@ -282,22 +304,9 @@ const CatalogoForm = ({ onSubmit, ...props }) => {
                                     <CFormFeedback invalid className='ms-3'>Ingresa un tipo de Servicio.</CFormFeedback>
                                 </CCol>
                             </CRow>
+                          */}
                             <CRow className='mb-2 '>
-                                <CCol md={6}>
-                                    <CFormLabel>Área</CFormLabel>
-                                    <CFormSelect
-                                        className="contactL-input"
-                                        disabled={props.soloLectura || props.soloVerificar}
-                                        required
-                                        options={areaCatalogos}
-                                        id="areaId"
-                                        value={state.areaId}
-                                        onChange={e =>
-                                            setState({ ...state, areaId: e.target.value })
-                                        }
-                                    />
-                                    <CFormFeedback invalid className='ms-3'>Ingresa un tipo de Area.</CFormFeedback>
-                                </CCol>
+                             
                                 <CCol md={6} >
                                     <CFormLabel>ID Rubro</CFormLabel>
                                     <CInputGroup className="mb-3 search-table has-validation">
@@ -314,9 +323,6 @@ const CatalogoForm = ({ onSubmit, ...props }) => {
                                         <CFormFeedback invalid className='ms-3'>Ingresa un Id de Rubro.</CFormFeedback>
                                     </CInputGroup>
                                 </CCol>
-
-                            </CRow>
-                            <CRow className='mb-3 '>
                                 <CCol md={6}>
                                     <CFormLabel>Tipo Cobro</CFormLabel>
                                     <CFormSelect
@@ -334,6 +340,9 @@ const CatalogoForm = ({ onSubmit, ...props }) => {
                                     />
                                     <CFormFeedback invalid className='ms-3'>Ingresa un tipo de cobro.</CFormFeedback>
                                 </CCol>
+                            </CRow>
+                            <CRow className='mb-3 '>
+                               
                                 <CCol md={6}>
                                     <CFormLabel>Moneda</CFormLabel>
                                     <CFormSelect
@@ -349,25 +358,26 @@ const CatalogoForm = ({ onSubmit, ...props }) => {
                                     />
                                     <CFormFeedback invalid className='ms-3'>Ingresa un tipo de moneda.</CFormFeedback>
                                 </CCol>
+                                {state.tipoCobroId == 59 && (
+
+
+    <CCol md={6}>
+        <CFormLabel>Monto</CFormLabel>
+        <CFormInput
+            className="contactL-input textArea"
+            disabled={props.soloLectura || props.soloVerificar}
+            value={state.monto}
+            onChange={setDecimal}
+            autoComplete="off"
+
+            type='double'
+        />
+    </CCol>
+
+)}
                             </CRow>
 
-                            {state.tipoCobroId == 59 && (
-
-                                <CRow className='mb-2 '>
-                                    <CCol md={3}>
-                                        <CFormLabel>Monto</CFormLabel>
-                                        <CFormInput
-                                            className="contactL-input textArea"
-                                            disabled={props.soloLectura || props.soloVerificar}
-                                            value={state.monto}
-                                            onChange={setDecimal}
-                                            autoComplete="off"
-
-                                            type='double'
-                                        />
-                                    </CCol>
-                                </CRow>
-                            )}
+                        
                             {state.tipoCobroId == 60 && (
 
                                 <CRow className='mb-2 '>
