@@ -1108,14 +1108,17 @@
 
   &:hover {
     color: white !important;
-    background-color: #01BDE2;
+    background-color: #0801e29f;
   }
 }
-
+.bg-primary {
+  --cui-bg-opacity: 1;
+  background-color:#0801e2 !important;
+}
 
 .paginationActive a {
   color: white !important;
-  background-color: #01BDE2;
+  background-color: #0801e2;
 }
 
 .paginationBttns .paginationDisabled a {

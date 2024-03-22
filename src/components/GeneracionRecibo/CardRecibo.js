@@ -791,34 +791,38 @@ function CardRecibo(props) {
                                             }
                                         </CRow>
                                         <CRow className='ms-3 mt-1'>
-                                            <CCol sm={4} >
-                                                <CFormLabel className='textL' >Categoría</CFormLabel>
-                                                <CFormSelect
-                                                    disabled={servicioLaboratorio}
-                                                    className="contactL-input me-2"
-                                                    options={categoriaServicio}
-                                                    id="categoriaServicio"
-                                                    value={recibo.categoriaServicio}
-                                                    onChange={e => {
-                                                        setRecibo({ ...recibo, categoriaServicio: e.target.value });
-                                                    }}
-                                                />
-                                            </CCol>
+
+                                            {/* 
+<CCol sm={4}>
+    <CFormLabel className='textL'>Categoría</CFormLabel>
+    <CFormSelect
+        disabled={servicioLaboratorio}
+        className="contactL-input me-2"
+        options={categoriaServicio}
+        id="categoriaServicio"
+        value={recibo.categoriaServicio}
+        onChange={e => {
+            setRecibo({ ...recibo, categoriaServicio: e.target.value });
+        }}
+    />
+</CCol>
+*/}
+                                            {/* 
+<CCol sm={5}>
+    <CFormLabel className='textL'>Departamento</CFormLabel>
+    <CFormSelect
+        className="contactL-input me-2"
+        options={departamentoServicio}
+        id="departamentoServicio"
+        value={recibo.departamentoServicio}
+        onChange={e => {
+            setRecibo({ ...recibo, departamentoServicio: e.target.value });
+        }}
+    />
+</CCol>
+*/}
 
 
-                                            <CCol sm={5} >
-                                                <CFormLabel className='textL' >Departamento</CFormLabel>
-                                                <CFormSelect
-
-                                                    className="contactL-input me-2"
-                                                    options={departamentoServicio}
-                                                    id="departamentoServicio"
-                                                    value={recibo.departamentoServicio}
-                                                    onChange={e => {
-                                                        setRecibo({ ...recibo, departamentoServicio: e.target.value });
-                                                    }}
-                                                />
-                                            </CCol>
 
                                             <CCol md={1} className="mt-3 me-2" >
                                                 <CButton color="primary" className='rounded-pill mt-3 btn-black' onClick={() => buscar()}> <FaSearch className='me-2 ms-auto mb-1 mt-1' /> Buscar</CButton>
