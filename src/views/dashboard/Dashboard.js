@@ -396,7 +396,7 @@ const Dashboard = () => {
         <CRow>
           <CCol>
             <p className="fs-2">Hola, {usuario.nombre}.
-              <p className="fs-4 fw-light text-muted">Administra las gestiones de tus Recibos TGR-1.</p>
+              <p className="fs-4 fw-light text-muted">Administra las gestiones de tus Recibos GQ Racing</p>
             </p>
 
           </CCol>
@@ -542,7 +542,7 @@ const Dashboard = () => {
         <CRow>
           <CCol>
             <p className="fs-2">Hola, {usuario.nombre}.
-              <p className="fs-4 fw-light text-muted">Administra las gestiones de tus Recibos TGR-1.</p>
+              <p className="fs-4 fw-light text-muted">Administra las gestiones de tus Recibos GQ Racing</p>
             </p>
 
           </CCol>

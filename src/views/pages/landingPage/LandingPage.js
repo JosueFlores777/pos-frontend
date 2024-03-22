@@ -671,8 +671,8 @@ const Login = (props) => {
                       En caso de que se le presente algun problema tecnico puede avocarse al servicio al cliente 
                     </p>
                     <div className="contactS mt-3">
-                    <strong>• Ecruz@senasa.gob.hn</strong><br/>
-                    <strong>• Rgonzales@senasa.gob.hn</strong>
+                    <strong>• Ecruz@racing.com</strong><br/>
+                    <strong>• Rgonzales@racing.com</strong>
                     </div>
                   </div>
                 </div>
@@ -686,7 +686,7 @@ const Login = (props) => {
           <div className="bottom-footerL">
             <div className="copyright">
               <p className="textL">
-                Copyright&copy; 2023 <span>SENASA</span>. Servicio Nacional de Sanidad e Inocuidad Agroalimentaria
+                Copyright&copy; 2024 <span>GQ Racing SPORT</span>. Taller y servicios
               </p>
             </div>
             <div className="followme-wrap">
@@ -694,13 +694,13 @@ const Login = (props) => {
                 <h3>Redes Sociales</h3>
                 <span className="footerL-line"></span>
                 <div className="social-media">
-                  <a href="https://es-la.facebook.com/SagSenasaHn">
+                  <a href="#">
                     <i className="fab fa-facebook-f"><FaFacebook /></i>
                   </a>
-                  <a href="https://twitter.com/sagsenasahn?lang=es">
+                  <a href="#">
                     <i className="fab fa-twitter"><FaTwitter /></i>
                   </a>
-                  <a href="https://instagram.com/senasahonduras?igshid=YmMyMTA2M2Y=">
+                  <a href="#">
                     <i className="fab fa-instagram"><FaInstagram /></i>
                   </a>
                 </div>

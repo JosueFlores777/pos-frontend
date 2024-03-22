@@ -5,15 +5,15 @@ const AppFooter = () => {
   return (
     <CFooter>
       <div>
-        <a href="https://www.senasa.gob.hn/" target="_blank" rel="noopener noreferrer" className = "aFooter">
-          SENASA
+        <a href="#" target="_blank" rel="noopener noreferrer" className = "aFooter">
+        GQ Racing
         </a>
-        <span className="ms-1">&copy; 2022.</span>
+        <span className="ms-1">&copy; 2024.</span>
       </div>
       <div className="ms-auto">
         <span className="me-1">Desarrollado con apoyo de</span>
         <a  target="_blank"  className = "aFooter" rel="noopener noreferrer">
-          USAID
+          GI
         </a>
       </div>
     </CFooter>

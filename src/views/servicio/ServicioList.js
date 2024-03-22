@@ -209,6 +209,8 @@ const CatalogoList = (props) => {
                                     </CRow>
                                 </CCard>
                             </CCol>
+                           {/*
+                           
                             <CCol md={7}>
                                 <CFormLabel>Departamento</CFormLabel>
                                 <CFormSelect
@@ -221,6 +223,7 @@ const CatalogoList = (props) => {
                                     }
                                 />
                             </CCol>
+                           */}
                             <CCol md={2} >
                                 <CFormLabel>Código De Servicio</CFormLabel>
                                 <CInputGroup className="mb-1 search-table ">
