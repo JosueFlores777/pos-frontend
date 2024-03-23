@@ -328,12 +328,12 @@ const Register = () => {
                     <CCol md={6} >
                       <CFormLabel>Identificador
 
-                        {validacionRTN && (
+                        {validacionDNI && (
                           <sub className=" ms-1  text-danger">
-                            {"(DUI debe de tener 14 digitos)"}
+                            {"(DUI debe de tener 9 digitos)"}
                           </sub>
                         )}
-                        {validacionDNI && (
+                        {validacionRTN && (
                           <sub className=" ms-1 text-danger">
 
                             {"(NIT debe de tener 13 digitos)"}
