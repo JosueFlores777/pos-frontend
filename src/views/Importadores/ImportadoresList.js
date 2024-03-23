@@ -54,12 +54,11 @@ const Importadores = (props) => {
         }
     }
 
-    const colDef = [
-        { header: "Nombre", field: "nombre" },
-        { header: "Identificador", field: "identificador" },
-        { header: "Correo", field: "correo" },
+    const colDef = [       
+        { header: "Identificador", field: "identificador" }, 
+        { header: "Nombre", field: "nombre" },            
         {
-            header: "Acceso",
+            header: "Estado",
             render(row) {
                 if (row.accesoAprobado) {
                     return <CBadge color="success" shape="rounded-pill" >Activo</CBadge>;
@@ -103,9 +102,15 @@ const Importadores = (props) => {
                                 <CCard className={`mb-5 border-secondary border-0  text-black shadow-lg mb-3`}>
                                     <div className="position-relative ">
                                         <div className="position-absolute top-0 start-0">
-                                            <CFormText className='fs-2 fw-bold text-body'>Usuario Externo</CFormText>
+                                            <CFormText className='fs-2 fw-bold text-body'>Clientes</CFormText>
                                         </div>
-                                        
+                                        <div className="position-absolute top-0 end-0">
+                                            <AuthGuard permiso="importador-crear">
+                                                 <Link to={""} > {/*Poner Url de formulario Crear Cliente */}
+                                                    <CButton className='mt-2 btn-blue' > <FaPlus className='me-1 mb-1' />Crear Clientes</CButton>
+                                                </Link>
+                                            </AuthGuard>
+                                        </div>
                                     </div>
                                 </CCard>
                             </CCol>
@@ -167,7 +172,7 @@ const Importadores = (props) => {
                     >
                         <CRow className='mt-2'>
                             <CCol md={3}>
-                                <CCardTitle> Registros de Usuarios Externos
+                                <CCardTitle> Listado de Clientes
                                 </CCardTitle>
                             </CCol>
 

@@ -336,10 +336,10 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                                     <CRow className="justify-content-start">
                                                         <CCol xs={3}>
 
-                                                            <p><strong>Estado SENASA: </strong> {test(state.estadoSenasaId)}</p>
+                                                            <p><strong>Estado Proceso: </strong> {test(state.estadoSenasaId)}</p>
                                                         </CCol>
                                                         <CCol xs={3}>
-                                                            <p><strong>Estado SEFIN: </strong> {test(state.estadoSefinId)}</p>
+                                                            <p><strong>Estado Pago: </strong> {test(state.estadoSefinId)}</p>
                                                         </CCol>
                                                         {state.estadoSefinId === 8 && (
                                                             <>
@@ -354,7 +354,7 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                                         )}
                                                     </CRow>
 
-                                                    <p className="mb-0">Puedes Ponerte en contacto al soporte tecnico al correo <CAlertLink >Rgonzales@senasa.gob.hn o Ecruz@senasa.gob.hn</CAlertLink></p>
+                                                    <p className="mb-0">Puedes Ponerte en contacto al soporte tecnico al correo <CAlertLink >RUsuarioInter@prueba.com o RUsuarioInter@prueba.com</CAlertLink></p>
                                                 </CAlert>
                                             </CRow>
 

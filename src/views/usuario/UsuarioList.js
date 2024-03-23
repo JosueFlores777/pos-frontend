@@ -136,12 +136,12 @@ const Usuario = (props) => {
                                 <CCard className={`mb-5 border-secondary border-0  text-black shadow-lg mb-3`}>
                                     <div className="position-relative ">
                                         <div className="position-absolute top-0 start-0">
-                                            <CFormText className='fs-2 fw-bold text-body'>Usuario</CFormText>
+                                            <CFormText className='fs-2 fw-bold text-body'>Empleados</CFormText>
                                         </div>
                                         <div className="position-absolute top-0 end-0">
                                             <AuthGuard permiso="usuario-crear">
                                                 <Link to={"/usuario/crear"} >
-                                                    <CButton className='mt-2 btn-blue' > <FaPlus className='me-1 mb-1' />Crear Usuario</CButton>
+                                                    <CButton className='mt-2 btn-blue'> <FaPlus className='me-1 mb-1' />Crear Empleado</CButton>
                                                 </Link>
                                             </AuthGuard>
                                         </div>
@@ -170,7 +170,7 @@ const Usuario = (props) => {
                                         onChange={e =>
                                             setState({ ...state, nombre: e.target.value })
                                         }
-                                        placeholder="Identificador"
+                                        placeholder="Nombre Empleado"
                                         aria-label="Username"
                                         aria-describedby="basic-addon1"
                                     />
@@ -236,7 +236,7 @@ const Usuario = (props) => {
                     >
                         <CRow className='mt-2'>
                             <CCol md={3}>
-                                <CCardTitle> Registros de Usuarios Internos
+                                <CCardTitle> Listado de Empleados
                                 </CCardTitle>
                             </CCol>
 
