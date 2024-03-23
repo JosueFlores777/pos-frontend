@@ -56,7 +56,8 @@ const Importadores = (props) => {
 
     const colDef = [       
         { header: "Identificador", field: "identificador" }, 
-        { header: "Nombre", field: "nombre" },            
+        { header: "Nombre", field: "nombre" },           
+        { header: "Correo", field: "correo" }, 
         {
             header: "Estado",
             render(row) {
@@ -66,8 +67,6 @@ const Importadores = (props) => {
                 return <CBadge color="danger" shape="rounded-pill"  >Inactivo</CBadge>;
             }
         },
-
-
         {
             header: "Acciones",
             render(row, props) {
