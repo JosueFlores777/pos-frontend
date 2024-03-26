@@ -97,17 +97,16 @@ const Register = () => {
   const estalecerModelos = async (id) => {
 
     if (id > 0) {
-      var modelo = await service.apiAuth.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
-      console.log("this ", modelo);
+      var modelo = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
+      
       var modeloLista = modelo.lista;
       let listamodelo = ["",];
 
       modeloLista.forEach((element) => {
         listamodelo.push({ value: element.id, label: element.nombre });
-        console.log(element);
       });
 
-      setModelo(modeloLista);
+      setModelo(listamodelo);
 
     } else {
       setState({ ...state, modeloId: 0, mostrarModelo: false, marcaId: 0 });
@@ -526,8 +525,9 @@ const Register = () => {
                           value={state.marcaId}
   
                           onChange={e => {
-                            setState({ ...state, marcaId: e.target.value, mostrarModelo: true })
                             estalecerModelos(e.target.value);
+                            setState({ ...state, marcaId: e.target.value, mostrarModelo: true })
+                            
                           }}
                         />
                         <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
