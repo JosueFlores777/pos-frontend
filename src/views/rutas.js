@@ -39,6 +39,8 @@ export default {
     anios: "/catalogo/anio",
     unidadMedida: "/catalogo/tipo-unidad",
     estadosRecibo: "/catalogo/estado-recibo",
+    marcaCarro: "/catalogo/marca-carro",
+    modeloCarro: "/catalogo/carro-modelo",
   },
 
   archivos:{

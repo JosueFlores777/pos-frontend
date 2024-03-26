@@ -48,6 +48,8 @@ const Register = () => {
       direccion: "",
       nacionalidadId: "",
       departamentoId: "",
+      marcaId: "",
+      modeloId: "",
       municipioId: "",
       archivoId: "",
       busquedadValida: false,
@@ -65,6 +67,8 @@ const Register = () => {
   const [tipoIdentificador, setTipoIdentificador] = useState([])
   const [tipoPersona, setTipoPersona] = useState([])
   const [municipio, setMunicipio] = useState([])
+  const [modelo, setModelo] = useState([])
+  const [marca, setMarca] = useState([])
   const [nacionalidad, setNacionalidad] = useState([])
   const [validacionRTN, setValidacionRTN] = useState(false)
   const [validacionArchivo, setValidacionArchivo] = useState(false)
@@ -89,6 +93,27 @@ const Register = () => {
       setState({ ...state, municipioId: 0, mostrarMunicipio: false, departamentoId: 0 });
     }
   }
+
+  const estalecerModelos = async (id) => {
+ 
+    if (id > 0) {
+      var modelo = await service.apiAuth.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
+      console.log("this ",modelo);
+      var modeloLista = modelo.lista;
+      let listamodelo = ["",];
+    
+      modeloLista.forEach((element) => {
+        listamodelo.push({ value: element.id, label: element.nombre });
+        console.log(element);
+      });
+  
+      setModelo(modeloLista);
+      
+    } else {
+      setState({ ...state, modeloId: 0, mostrarModelo: false, marcaId: 0 });
+    }
+  }
+
   const buscarImportador = async () => {
 
     if (state.identificador != "" && state.tipoIdentificadorId == 5 && state.identificador.length == 14) {
@@ -97,6 +122,7 @@ const Register = () => {
       let importador = await service.apiAuth.get(
         rutas.importador.getPorIdentificador + "/" + id
       );
+      
       if (importador.id !== null && !importador.accesoAprobado) {
         estalecerMunicipios(importador.departamentoId);
         setState({
@@ -112,6 +138,7 @@ const Register = () => {
           departamentoId: importador.departamentoId,
           municipioId: importador.municipioId,
           mostrarMunicipio: true,
+          mostrarModelo: true,
           busquedadValida: true,
         });
         toast.info('Se encontro informacion de registro con tu identificacion. Actualice los datos que sean necesarios!', {
@@ -185,6 +212,7 @@ const Register = () => {
         departamentoId: "",
         municipioId: "",
         mostrarMunicipio: false,
+        mostrarModelo: false,
       })
       setValidacionRTN(false);
       setValidacionArchivo(false);
@@ -217,6 +245,7 @@ const Register = () => {
 
     setNacionalidad(listanacionalidad);
 
+
     var nacionalidad = await service.apiAuth.get(rutas.catalogos.tipoIdentificacion);
     var nacionalidadLista = nacionalidad.lista;
     var listanacionalidad = ["",];
@@ -232,8 +261,20 @@ const Register = () => {
     nacionalidadLista.forEach((element) => {
 
       listanacionalidad.push({ value: element.id, label: element.nombre });
+ 
     });
     setTipoPersona(listanacionalidad);
+
+
+    /*Marca */
+    var marca = await service.apiAuth.get(rutas.catalogos.marcaCarro);
+  
+    var marcaLista = marca.lista.map(element => ({
+      value: element.id,
+      label: element.nombre
+    }));
+    
+    setMarca(marcaLista);
 
     setLoading(false)
   }
@@ -471,7 +512,6 @@ const Register = () => {
                       <CFormLabel>Departamento</CFormLabel>
                       <CFormSelect
                         className="contactL-input"
-
                         required
                         options={departamento}
                         id="departamentoId"
@@ -498,6 +538,38 @@ const Register = () => {
                         }
                       />
                       <CFormFeedback invalid>Ingresa un Municipio.</CFormFeedback>
+                    </CCol>
+                    <CCol md={6}>
+                      <CFormLabel>Marca Carro</CFormLabel>
+                      <CFormSelect
+                        className="contactL-input"
+
+                        required
+                        options={marca}
+                        id="marcaId"
+                        value={state.marcaId}
+
+                        onChange={e => {
+                          setState({ ...state, marcaId: e.target.value, mostrarModelo: true })
+                          estalecerModelos(e.target.value);
+                        }}
+                      />
+                      <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
+                    </CCol>
+                    <CCol md={6}>
+                      <CFormLabel>Modelo</CFormLabel>
+                      <CFormSelect
+                        className="contactL-input"
+                        disabled={!state.mostrarModelo}
+                        required
+                        options={modelo}
+                        id="modeloId"
+                        value={state.modeloId}
+                        onChange={e => 
+                          setState({ ...state, modeloId: e.target.value })
+                        }
+                      />
+                      <CFormFeedback invalid>Ingresa un Modelo.</CFormFeedback>
                     </CCol>
 
                   </CRow>
