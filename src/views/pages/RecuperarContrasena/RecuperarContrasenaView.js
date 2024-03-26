@@ -130,7 +130,7 @@ const RecuperarContrasena = ({ onSubmit, ...props }) => {
                     validated={validated}
                   >
                     <img className="img-fluid" src={logoH} alt="Logo Login"></img>
-                    <h1 className="text-center" >SENASA</h1>
+                    <h1 className="text-center" >GQ Racing</h1>
                     <p className="text-medium-emphasis text-center">Recupera tu contraseña a través de tu correo / identificador asociado</p>
 
                     {!solicitud && (

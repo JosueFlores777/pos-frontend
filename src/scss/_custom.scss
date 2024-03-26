@@ -51,8 +51,9 @@
   }
 
   &:active {
-    background-color: #0003c7;
+    background-color: #01BDE2;
     color: whitesmoke;
+
     .nav-icon {
       color: whitesmoke;
     }
@@ -60,8 +61,9 @@
 }
 
 .sidebar-nav .nav-link.active {
-  background-color: #e20101;
+  background-color: #01BDE2;
   color: whitesmoke;
+
   .nav-icon {
     color: whitesmoke;
   }
@@ -117,7 +119,7 @@
 }
 
 .aFooter {
-  color: #0022c7;
+  color: #01BDE2;
   text-decoration: none;
 }
 
@@ -521,11 +523,11 @@
 }
 .btn-blue {
 
-  --cui-btn-shadow: #0801e2;
+  --cui-btn-shadow: #00BEE4;
   font-weight: 500;
   color: #F7F7F7;
-  background-color: #0801e2;
-  border: 1px solid #00bee4;
+  background-color: #01BDE2;
+  border: 1px solid #00BEE4;
   text-decoration: none !important;
 
   display: flex;
@@ -535,27 +537,27 @@
   transition: 0.1s ease-in-out;
 
   &:hover {
-    border-color: #e20101f3;
+    border-color: #00BEE4;
     color: #F7F7F7;
     box-shadow: 3px 5px 7px #333;
-    background-color: #e20101;
+    background-color: #01BDE2;
   }
 
   &:focus {
-    border-color: #0801e29f;
+    border-color: #00BEE4;
     color: #F7F7F7;
     box-shadow: none;
-    background-color: #0801e29f;
+    background-color: #00BEE4;
 
     &:hover {
-      border-color: #0801e29f;
+      border-color: #00BEE4;
       color: #F7F7F7;
       box-shadow: 3px 5px 7px #333;
-      background-color: #0801e29f;
+      background-color: #01BDE2;
 
       &:active {
-        border-color: #0801e29f;
-        color: #0801e29f;
+        border-color: #00BEE4;
+        color: #00BEE4;
         box-shadow: 3px 5px 7px #333;
         background-color: #F7F7F7;
       }
@@ -1108,17 +1110,14 @@
 
   &:hover {
     color: white !important;
-    background-color: #0801e29f;
+    background-color: #01BDE2;
   }
 }
-.bg-primary {
-  --cui-bg-opacity: 1;
-  background-color:#0801e2 !important;
-}
+
 
 .paginationActive a {
   color: white !important;
-  background-color: #0801e2;
+  background-color: #01BDE2;
 }
 
 .paginationBttns .paginationDisabled a {

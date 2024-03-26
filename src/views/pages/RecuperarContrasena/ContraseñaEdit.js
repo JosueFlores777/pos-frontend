@@ -99,7 +99,7 @@ const RecuperarContrasena = ({ onSubmit, ...props }) => {
                                         noValidate
                                     >
                                         <img className="img-fluid" src={logoH} alt="Logo Login"></img>
-                                        <h1 className="text-center" >SENASA</h1>
+                                        <h1 className="text-center" >GQ Racing</h1>
                                         <p className="text-medium-emphasis text-center">ingresa tu nueva contraseña</p>
 
                                         <CRow>

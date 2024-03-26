@@ -52,7 +52,7 @@ const VerificarCorreo = () => {
                                 <h1 className="float-left display-4 mr-4 text-primary">OK</h1>
                                 <h4 className="pt-3">Tu correo fue verificado</h4>
                                 <p className="text-muted float-left">
-                                    Una vez que tu información sea revisada por personal de SENASA
+                                    Una vez que tu información sea revisada por personal de GQ Racing
                                     se te enviara un correo con tu usuario y contraseña.
                                 </p>
                             </span>
