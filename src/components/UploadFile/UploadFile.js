@@ -136,7 +136,7 @@ function UploadFile(props) {
             <CCol style={{ height: 600 }}>
               {!archivoCargado && (
                 <div className="position-absolute top-50 start-50">
-                  <CSpinner size="xl" />
+                  <CSpinner size="sm" />
                 </div>
 
               )}

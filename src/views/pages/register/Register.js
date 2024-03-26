@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
-import { CCard, CRow, CCol, CModal, CFormCheck, CModalBody,CModalTitle,CModalHeader,CContainer, CCardBody, CFormSelect, CFormLabel, CInputGroup, CFormInput, CButton, CFormText, CForm, CFormFeedback, CImage } from '@coreui/react'
+import { CCard, CRow, CCol, CModal, CFormCheck, CModalBody, CModalTitle, CModalHeader, CContainer, CCardBody, CFormSelect, CFormLabel, CInputGroup, CFormInput, CButton, CFormText, CForm, CFormFeedback, CImage } from '@coreui/react'
 import service from "../../../Http/httpHelper";
 import rutas from "../../rutas";
 import banner from "../../../assets/imgHome/bannerRegistro4.png"
@@ -95,20 +95,20 @@ const Register = () => {
   }
 
   const estalecerModelos = async (id) => {
- 
+
     if (id > 0) {
       var modelo = await service.apiAuth.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
-      console.log("this ",modelo);
+      console.log("this ", modelo);
       var modeloLista = modelo.lista;
       let listamodelo = ["",];
-    
+
       modeloLista.forEach((element) => {
         listamodelo.push({ value: element.id, label: element.nombre });
         console.log(element);
       });
-  
+
       setModelo(modeloLista);
-      
+
     } else {
       setState({ ...state, modeloId: 0, mostrarModelo: false, marcaId: 0 });
     }
@@ -122,7 +122,7 @@ const Register = () => {
       let importador = await service.apiAuth.get(
         rutas.importador.getPorIdentificador + "/" + id
       );
-      
+
       if (importador.id !== null && !importador.accesoAprobado) {
         estalecerMunicipios(importador.departamentoId);
         setState({
@@ -221,62 +221,35 @@ const Register = () => {
       setValidated(false);
     }
   }, [state.identificador])
+
   useEffect(() => {
 
   }, [state])
+
+  const consultaCatalogo = async (rutaCatalogo) => {
+    var dataResponse = await service.apiBackend.get(rutaCatalogo);
+    let dataResponseList = dataResponse.lista;
+    let data = ["",];
+    dataResponseList.forEach((element) => {
+      data.push({ value: element.id, label: element.nombre });
+    });
+    console.log(data);
+    return data;
+  }
+
   const consultarCatalogos = async () => {
-    var departamento = await service.apiAuth.get(rutas.catalogos.depto);
-    var departamentoLista = departamento.lista;
-    let lista = ["",];
-    departamentoLista.forEach((element) => {
+    var depa = await consultaCatalogo(rutas.catalogos.depto);
+    var nacionalidad = await consultaCatalogo(rutas.catalogos.paises);
+    var tipoIdentificador = await consultaCatalogo(rutas.catalogos.tipoIdentificacion);
+    var tipoPersona = await consultaCatalogo(rutas.catalogos.tipoPersona);
+    var marca = await consultaCatalogo(rutas.catalogos.marcaCarro);
+    setDepartamento(depa);
+    setNacionalidad(nacionalidad);
+    setTipoIdentificador(tipoIdentificador);
+    setTipoPersona(tipoPersona);
+    setMarca(marca);
+    setLoading(false);
 
-      lista.push({ value: element.id, label: element.nombre });
-    });
-
-    setDepartamento(lista);
-
-    var nacionalidad = await service.apiAuth.get(rutas.catalogos.paises);
-    var nacionalidadLista = nacionalidad.lista;
-    var listanacionalidad = ["",];
-    nacionalidadLista.forEach((element) => {
-
-      listanacionalidad.push({ value: element.id, label: element.nombre });
-    });
-
-    setNacionalidad(listanacionalidad);
-
-
-    var nacionalidad = await service.apiAuth.get(rutas.catalogos.tipoIdentificacion);
-    var nacionalidadLista = nacionalidad.lista;
-    var listanacionalidad = ["",];
-    nacionalidadLista.forEach((element) => {
-
-      listanacionalidad.push({ value: element.id, label: element.nombre });
-    });
-    setTipoIdentificador(listanacionalidad);
-
-    var nacionalidad = await service.apiAuth.get(rutas.catalogos.tipoPersona);
-    var nacionalidadLista = nacionalidad.lista;
-    var listanacionalidad = ["",];
-    nacionalidadLista.forEach((element) => {
-
-      listanacionalidad.push({ value: element.id, label: element.nombre });
- 
-    });
-    setTipoPersona(listanacionalidad);
-
-
-    /*Marca */
-    var marca = await service.apiAuth.get(rutas.catalogos.marcaCarro);
-  
-    var marcaLista = marca.lista.map(element => ({
-      value: element.id,
-      label: element.nombre
-    }));
-    
-    setMarca(marcaLista);
-
-    setLoading(false)
   }
   const onSubmit = async (data) => {
     if (state.archivoId === "") {
@@ -315,331 +288,336 @@ const Register = () => {
     }
     setValidated(true)
   }
-  return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center headerL">
-
-      <div className="overlayL overlayL-lg ">
-        <img src={reqSvgs(state.square)} className="shape square" alt="" />
-        <img src={reqSvgs(state.circle)} className="shape circle" alt="" />
-        <img src={reqSvgs(state.halfCircle)} className="shape half-circle1" alt="" />
-        <img src={reqSvgs(state.halfCircle)} className="shape half-circle2" alt="" />
-        <img src={reqSvgs(state.x)} className="shape xshape" alt="" />
-        <img src={reqSvgs(state.wave)} className="shape wave wave1" alt="" />
-        <img src={reqSvgs(state.wave)} className="shape wave wave2" alt="" />
-        <img src={reqSvgs(state.triangle)} className="shape triangle" alt="" />
-        <img src={reqSvgs(state.letters)} className="letters" alt="" />
-        <img src={reqSvgs(state.points1)} className="points points1" alt="" />
-      </div>
-
-
-
-      <CContainer >
-
-        <CRow className="justify-content-center mb-1  ">
-
-          <CCol md={11} lg={9} xl={8}>
-
-            <CCard className="mx-4 bg-white rounded-top">
-              <CImage className='mb-1 rounded-top' fluid src={banner} />
-              <CCardBody className="p-4 ">
-
-                <CForm
-                  className="row needs-validation "
-                  noValidate
-                  validated={validated}
-                >
-                  <CRow className='mb-1 '>
-                    <CCol md={6}>
-                      <CFormLabel>Tipo Identificador</CFormLabel>
-                      <CFormSelect
-                        className="contactL-input"
-
-                        required
-                        options={tipoIdentificador}
-                        id="nacionalidadId"
-                        value={state.tipoIdentificadorId}
-                        onChange={e => {
-                          setState({ ...state, tipoIdentificadorId: e.target.value });
-                          cambiarTipoIdentificador();
-                        }}
-                      />
-                      <CFormFeedback invalid>Ingresa un Tipo Identificador.</CFormFeedback>
-                    </CCol>
-
-                    <CCol md={6} >
-                      <CFormLabel>Identificador
-
-                        {validacionDNI && (
-                          <sub className=" ms-1  text-danger">
-                            {"(DUI debe de tener 9 digitos)"}
-                          </sub>
-                        )}
-                        {validacionRTN && (
-                          <sub className=" ms-1 text-danger">
-
-                            {"(NIT debe de tener 13 digitos)"}
-                          </sub>
-                        )}
-                        {validacionPSPT && (
-                          <sub className=" ms-1 text-danger">
-                            {"(El Pasaporte debe de tener entre 4 a 20 digitos)"}
-                          </sub>
-                        )}
-                      </CFormLabel>
-                      <CInputGroup className="mb-2 search-table has-validation">
-                        <CFormInput
+  if(loading){
+    return <Loader/>
+  }else {
+    return (
+      <div className="bg-light min-vh-100 d-flex flex-row align-items-center headerL">
+  
+        <div className="overlayL overlayL-lg ">
+          <img src={reqSvgs(state.square)} className="shape square" alt="" />
+          <img src={reqSvgs(state.circle)} className="shape circle" alt="" />
+          <img src={reqSvgs(state.halfCircle)} className="shape half-circle1" alt="" />
+          <img src={reqSvgs(state.halfCircle)} className="shape half-circle2" alt="" />
+          <img src={reqSvgs(state.x)} className="shape xshape" alt="" />
+          <img src={reqSvgs(state.wave)} className="shape wave wave1" alt="" />
+          <img src={reqSvgs(state.wave)} className="shape wave wave2" alt="" />
+          <img src={reqSvgs(state.triangle)} className="shape triangle" alt="" />
+          <img src={reqSvgs(state.letters)} className="letters" alt="" />
+          <img src={reqSvgs(state.points1)} className="points points1" alt="" />
+        </div>
+  
+  
+  
+        <CContainer >
+  
+          <CRow className="justify-content-center mb-1  ">
+  
+            <CCol md={11} lg={9} xl={8}>
+  
+              <CCard className="mx-4 bg-white rounded-top">
+                <CImage className='mb-1 rounded-top' fluid src={banner} />
+                <CCardBody className="p-4 ">
+  
+                  <CForm
+                    className="row needs-validation "
+                    noValidate
+                    validated={validated}
+                  >
+                    <CRow className='mb-1 '>
+                      <CCol md={6}>
+                        <CFormLabel>Tipo Identificador</CFormLabel>
+                        <CFormSelect
                           className="contactL-input"
-                          disabled={state.tipoIdentificadorId === ""}
-                          id="name"
-                          value={state.identificador}
-                          onChange={(e) => validarIdentificador(e)}
-                          autoComplete="off"
+  
                           required
+                          options={tipoIdentificador}
+                          id="nacionalidadId"
+                          value={state.tipoIdentificadorId}
+                          onChange={e => {
+                            setState({ ...state, tipoIdentificadorId: e.target.value });
+                            cambiarTipoIdentificador();
+                          }}
                         />
-                        <CFormFeedback invalid>Ingresa un Identificador.</CFormFeedback>
-                      </CInputGroup>
-                    </CCol>
-
-
-                    <CCol md={6}>
-                      <CFormLabel>Tipo Persona</CFormLabel>
-                      <CFormSelect
-                        className="contactL-input"
-                        disabled={state.busquedadValida}
-                        required
-                        options={tipoPersona}
-                        id="nacionalidadId"
-                        value={state.tipoPersonaId}
-                        onChange={e =>
-                          setState({ ...state, tipoPersonaId: e.target.value })
-                        }
-                      />
-                      <CFormFeedback invalid>Ingresa un Tipo de Persona.</CFormFeedback>
-                    </CCol>
-                    <CCol md={6} >
-                      <CFormLabel>Nombre</CFormLabel>
-                      <CInputGroup className="mb-2 search-table has-validation">
-                        <CFormInput
+                        <CFormFeedback invalid>Ingresa un Tipo Identificador.</CFormFeedback>
+                      </CCol>
+  
+                      <CCol md={6} >
+                        <CFormLabel>Identificador
+  
+                          {validacionDNI && (
+                            <sub className=" ms-1  text-danger">
+                              {"(DUI debe de tener 9 digitos)"}
+                            </sub>
+                          )}
+                          {validacionRTN && (
+                            <sub className=" ms-1 text-danger">
+  
+                              {"(NIT debe de tener 13 digitos)"}
+                            </sub>
+                          )}
+                          {validacionPSPT && (
+                            <sub className=" ms-1 text-danger">
+                              {"(El Pasaporte debe de tener entre 4 a 20 digitos)"}
+                            </sub>
+                          )}
+                        </CFormLabel>
+                        <CInputGroup className="mb-2 search-table has-validation">
+                          <CFormInput
+                            className="contactL-input"
+                            disabled={state.tipoIdentificadorId === ""}
+                            id="name"
+                            value={state.identificador}
+                            onChange={(e) => validarIdentificador(e)}
+                            autoComplete="off"
+                            required
+                          />
+                          <CFormFeedback invalid>Ingresa un Identificador.</CFormFeedback>
+                        </CInputGroup>
+                      </CCol>
+  
+  
+                      <CCol md={6}>
+                        <CFormLabel>Tipo Persona</CFormLabel>
+                        <CFormSelect
                           className="contactL-input"
                           disabled={state.busquedadValida}
-                          id="name"
-                          value={state.nombre}
-                          onChange={e =>
-                            setState({ ...state, nombre: e.target.value })
-                          }
-                          autoComplete="off"
                           required
-                        />
-                        <CFormFeedback invalid>Ingresa un nombre.</CFormFeedback>
-                      </CInputGroup>
-                    </CCol>
-                    <CCol md={6} >
-                      <CFormLabel>Telefono</CFormLabel>
-                      <CInputGroup className="mb-2 search-table has-validation">
-                        <CFormInput
-                          className="contactL-input"
-                          type='number'
-
-                          id="name"
-                          value={state.telefono}
+                          options={tipoPersona}
+                          id="nacionalidadId"
+                          value={state.tipoPersonaId}
                           onChange={e =>
-                            setState({ ...state, telefono: e.target.value })
+                            setState({ ...state, tipoPersonaId: e.target.value })
                           }
-                          autoComplete="off"
-                          required
                         />
-                        <CFormFeedback invalid>Ingresa un Telefono.</CFormFeedback>
-                      </CInputGroup>
-                    </CCol>
-
-                    <CCol md={6} >
-                      <CFormLabel>Correo</CFormLabel>
-                      <CInputGroup className="mb-2 search-table has-validation">
-                        <CFormInput
+                        <CFormFeedback invalid>Ingresa un Tipo de Persona.</CFormFeedback>
+                      </CCol>
+                      <CCol md={6} >
+                        <CFormLabel>Nombre</CFormLabel>
+                        <CInputGroup className="mb-2 search-table has-validation">
+                          <CFormInput
+                            className="contactL-input"
+                            disabled={state.busquedadValida}
+                            id="name"
+                            value={state.nombre}
+                            onChange={e =>
+                              setState({ ...state, nombre: e.target.value })
+                            }
+                            autoComplete="off"
+                            required
+                          />
+                          <CFormFeedback invalid>Ingresa un nombre.</CFormFeedback>
+                        </CInputGroup>
+                      </CCol>
+                      <CCol md={6} >
+                        <CFormLabel>Telefono</CFormLabel>
+                        <CInputGroup className="mb-2 search-table has-validation">
+                          <CFormInput
+                            className="contactL-input"
+                            type='number'
+  
+                            id="name"
+                            value={state.telefono}
+                            onChange={e =>
+                              setState({ ...state, telefono: e.target.value })
+                            }
+                            autoComplete="off"
+                            required
+                          />
+                          <CFormFeedback invalid>Ingresa un Telefono.</CFormFeedback>
+                        </CInputGroup>
+                      </CCol>
+  
+                      <CCol md={6} >
+                        <CFormLabel>Correo</CFormLabel>
+                        <CInputGroup className="mb-2 search-table has-validation">
+                          <CFormInput
+                            className="contactL-input"
+  
+                            id="name"
+                            value={state.correo}
+                            onChange={e => {
+                              setCorreovalido(false);
+                              var regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                              if (regex.test(e.target.value)) {
+                                setCorreovalido(true);
+                              } else { setCorreovalido(false) }
+                              setState({ ...state, correo: e.target.value })
+                            }
+                            }
+                            autoComplete="off"
+                            invalid={!correoValido}
+                            required
+                          />
+                          <CFormFeedback invalid>Ingresa un Correo.</CFormFeedback>
+                        </CInputGroup>
+                      </CCol>
+                      <CCol md={6} >
+                        <CFormLabel>Direccion</CFormLabel>
+                        <CInputGroup className="mb-2 search-table has-validation">
+                          <CFormInput
+                            className="contactL-input"
+  
+                            id="name"
+                            value={state.direccion}
+                            onChange={e =>
+                              setState({ ...state, direccion: e.target.value })
+                            }
+                            autoComplete="off"
+                            required
+                          />
+                          <CFormFeedback invalid>Ingresa una Direccion.</CFormFeedback>
+                        </CInputGroup>
+                      </CCol>
+                      <CCol md={6}>
+                        <CFormLabel>Nacionalidad</CFormLabel>
+                        <CFormSelect
                           className="contactL-input"
-
-                          id="name"
-                          value={state.correo}
+  
+                          required
+                          options={nacionalidad}
+                          id="nacionalidadId"
+                          value={state.nacionalidadId}
+                          onChange={e =>
+                            setState({ ...state, nacionalidadId: e.target.value })
+                          }
+                        />
+                        <CFormFeedback invalid>Ingresa un nacionalidad.</CFormFeedback>
+                      </CCol>
+                      <CCol md={6}>
+                        <CFormLabel>Departamento</CFormLabel>
+                        <CFormSelect
+                          className="contactL-input"
+                          required
+                          options={departamento}
+                          id="departamentoId"
+                          value={state.departamentoId}
+  
                           onChange={e => {
-                            setCorreovalido(false);
-                            var regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-                            if (regex.test(e.target.value)) {
-                              setCorreovalido(true);
-                            } else { setCorreovalido(false) }
-                            setState({ ...state, correo: e.target.value })
-                          }
-                          }
-                          autoComplete="off"
-                          invalid={!correoValido}
-                          required
+                            setState({ ...state, departamentoId: e.target.value, mostrarMunicipio: true })
+                            estalecerMunicipios(e.target.value);
+                          }}
                         />
-                        <CFormFeedback invalid>Ingresa un Correo.</CFormFeedback>
-                      </CInputGroup>
-                    </CCol>
-                    <CCol md={6} >
-                      <CFormLabel>Direccion</CFormLabel>
-                      <CInputGroup className="mb-2 search-table has-validation">
-                        <CFormInput
+                        <CFormFeedback invalid>Ingresa un Departamento.</CFormFeedback>
+                      </CCol>
+                      <CCol md={6}>
+                        <CFormLabel>Municipio</CFormLabel>
+                        <CFormSelect
                           className="contactL-input"
-
-                          id="name"
-                          value={state.direccion}
+                          disabled={!state.mostrarMunicipio}
+                          required
+                          options={municipio}
+                          id="municipioId"
+                          value={state.municipioId}
                           onChange={e =>
-                            setState({ ...state, direccion: e.target.value })
+                            setState({ ...state, municipioId: e.target.value })
                           }
-                          autoComplete="off"
-                          required
                         />
-                        <CFormFeedback invalid>Ingresa una Direccion.</CFormFeedback>
-                      </CInputGroup>
-                    </CCol>
-                    <CCol md={6}>
-                      <CFormLabel>Nacionalidad</CFormLabel>
-                      <CFormSelect
-                        className="contactL-input"
-
-                        required
-                        options={nacionalidad}
-                        id="nacionalidadId"
-                        value={state.nacionalidadId}
-                        onChange={e =>
-                          setState({ ...state, nacionalidadId: e.target.value })
-                        }
-                      />
-                      <CFormFeedback invalid>Ingresa un nacionalidad.</CFormFeedback>
-                    </CCol>
-                    <CCol md={6}>
-                      <CFormLabel>Departamento</CFormLabel>
-                      <CFormSelect
-                        className="contactL-input"
-                        required
-                        options={departamento}
-                        id="departamentoId"
-                        value={state.departamentoId}
-
-                        onChange={e => {
-                          setState({ ...state, departamentoId: e.target.value, mostrarMunicipio: true })
-                          estalecerMunicipios(e.target.value);
-                        }}
-                      />
-                      <CFormFeedback invalid>Ingresa un Departamento.</CFormFeedback>
-                    </CCol>
-                    <CCol md={6}>
-                      <CFormLabel>Municipio</CFormLabel>
-                      <CFormSelect
-                        className="contactL-input"
-                        disabled={!state.mostrarMunicipio}
-                        required
-                        options={municipio}
-                        id="municipioId"
-                        value={state.municipioId}
-                        onChange={e =>
-                          setState({ ...state, municipioId: e.target.value })
-                        }
-                      />
-                      <CFormFeedback invalid>Ingresa un Municipio.</CFormFeedback>
-                    </CCol>
-                    <CCol md={6}>
-                      <CFormLabel>Marca Carro</CFormLabel>
-                      <CFormSelect
-                        className="contactL-input"
-
-                        required
-                        options={marca}
-                        id="marcaId"
-                        value={state.marcaId}
-
-                        onChange={e => {
-                          setState({ ...state, marcaId: e.target.value, mostrarModelo: true })
-                          estalecerModelos(e.target.value);
-                        }}
-                      />
-                      <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
-                    </CCol>
-                    <CCol md={6}>
-                      <CFormLabel>Modelo</CFormLabel>
-                      <CFormSelect
-                        className="contactL-input"
-                        disabled={!state.mostrarModelo}
-                        required
-                        options={modelo}
-                        id="modeloId"
-                        value={state.modeloId}
-                        onChange={e => 
-                          setState({ ...state, modeloId: e.target.value })
-                        }
-                      />
-                      <CFormFeedback invalid>Ingresa un Modelo.</CFormFeedback>
-                    </CCol>
-
-                  </CRow>
-                  <CRow>
-                    <CCol className='mt-2'>
-                      <FileUpload
-                        mostrarLableSiempre={true}
-                        label={"Comprobante de identificación"}
-                        servicio={rutas.archivos.registro}
-                        onArchivoCargado={(e) => {
-                          setState({ ...state, archivoId: e.identificador });
-                          setValidacionArchivo(false);
-                        }
-                        }
-                      />
-                      {validacionArchivo && (
-                        <sub className=" ms-1 text-danger">
-                          {"Debes adjuntar un comprobante de identificación"}
-                        </sub>
-                      )}
-                    </CCol>
-
-                  </CRow>
-                  <CRow className='mt-3'>
-
-                    <CCol>
-                      <div className="d-grid gap-2 d-md-flex justify-content-md-end ">
-                        <CFormCheck
-                          className='mt-2'
-                          type="checkbox"
-                          id="invalidCheck"
-                          value={isConfirmed}
-                          onChange={handleChange}
-                          label={
-                            <small className=''>
-                              Acepto Los Terminos y Condiciones  <CButton variant="ghost" onClick={() => setVisibleXL(!visibleXL)}><FiExternalLink size={"20"} /></CButton> .
-                            </small>
+                        <CFormFeedback invalid>Ingresa un Municipio.</CFormFeedback>
+                      </CCol>
+                      <CCol md={6}>
+                        <CFormLabel>Marca Carro</CFormLabel>
+                        <CFormSelect
+                          className="contactL-input"
+  
+                          required
+                          options={marca}
+                          id="marcaId"
+                          value={state.marcaId}
+  
+                          onChange={e => {
+                            setState({ ...state, marcaId: e.target.value, mostrarModelo: true })
+                            estalecerModelos(e.target.value);
+                          }}
+                        />
+                        <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
+                      </CCol>
+                      <CCol md={6}>
+                        <CFormLabel>Modelo</CFormLabel>
+                        <CFormSelect
+                          className="contactL-input"
+                          disabled={!state.mostrarModelo}
+                          required
+                          options={modelo}
+                          id="modeloId"
+                          value={state.modeloId}
+                          onChange={e =>
+                            setState({ ...state, modeloId: e.target.value })
                           }
-                          required
                         />
-                        <CFormFeedback invalid>You must agree before submitting.</CFormFeedback>
-                        <Link to={"/"} >
-                          <CButton className='me-md-2 btn-black' >Cancelar</CButton>
-                        </Link>
-                        <div>
-                          <CButton onClick={(e) => validate(e)} className='btn-blue' >{Icon} Registrarme  </CButton>
+                        <CFormFeedback invalid>Ingresa un Modelo.</CFormFeedback>
+                      </CCol>
+  
+                    </CRow>
+                    <CRow>
+                      <CCol className='mt-2'>
+                        <FileUpload
+                          mostrarLableSiempre={true}
+                          label={"Comprobante de identificación"}
+                          servicio={rutas.archivos.registro}
+                          onArchivoCargado={(e) => {
+                            setState({ ...state, archivoId: e.identificador });
+                            setValidacionArchivo(false);
+                          }
+                          }
+                        />
+                        {validacionArchivo && (
+                          <sub className=" ms-1 text-danger">
+                            {"Debes adjuntar un comprobante de identificación"}
+                          </sub>
+                        )}
+                      </CCol>
+  
+                    </CRow>
+                    <CRow className='mt-3'>
+  
+                      <CCol>
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end ">
+                          <CFormCheck
+                            className='mt-2'
+                            type="checkbox"
+                            id="invalidCheck"
+                            value={isConfirmed}
+                            onChange={handleChange}
+                            label={
+                              <small className=''>
+                                Acepto Los Terminos y Condiciones  <CButton variant="ghost" onClick={() => setVisibleXL(!visibleXL)}><FiExternalLink size={"20"} /></CButton> .
+                              </small>
+                            }
+                            required
+                          />
+                          <CFormFeedback invalid>You must agree before submitting.</CFormFeedback>
+                          <Link to={"/"} >
+                            <CButton className='me-md-2 btn-black' >Cancelar</CButton>
+                          </Link>
+                          <div>
+                            <CButton onClick={(e) => validate(e)} className='btn-blue' >{Icon} Registrarme  </CButton>
+                          </div>
+  
                         </div>
-
-                      </div>
-                    </CCol>
-                  </CRow>
-
-                </CForm>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        </CRow>
-        <CModal size="xl" visible={visibleXL} onClose={() => setVisibleXL(false)}>
-          <CModalHeader>
-            <CModalTitle>Terminos y Condiciones</CModalTitle>
-          </CModalHeader>
-          <CModalBody>
-            <TerminosCondiciones/>
-          </CModalBody>
-        </CModal>
-
-
-      </CContainer>
-    </div >
-  )
+                      </CCol>
+                    </CRow>
+  
+                  </CForm>
+                </CCardBody>
+              </CCard>
+            </CCol>
+          </CRow>
+          <CModal size="xl" visible={visibleXL} onClose={() => setVisibleXL(false)}>
+            <CModalHeader>
+              <CModalTitle>Terminos y Condiciones</CModalTitle>
+            </CModalHeader>
+            <CModalBody>
+              <TerminosCondiciones />
+            </CModalBody>
+          </CModal>
+  
+  
+        </CContainer>
+      </div >
+    )
+  }
+  
 }
 
 export default Register
