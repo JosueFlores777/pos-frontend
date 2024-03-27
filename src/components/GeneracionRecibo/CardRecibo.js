@@ -344,7 +344,9 @@ function CardRecibo(props) {
         let categoriaServicio = await consultaCatalogo(rutas.catalogos.categoria);
         let tipoUnidades = await consultaCatalogo(rutas.catalogos.unidadMedida);
         let carro = await consultaCatalogo(rutas.catalogos.marcaCarro);
+       
 
+        setMarca(carro);
         setDescuentos(descuento);
         setIdentificadorCatalogos(tipoIdentificador);
         setRegionales(regionales);
