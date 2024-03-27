@@ -232,7 +232,6 @@ const Register = () => {
     dataResponseList.forEach((element) => {
       data.push({ value: element.id, label: element.nombre });
     });
-    console.log(data);
     return data;
   }
 
@@ -514,7 +513,7 @@ const Register = () => {
                         />
                         <CFormFeedback invalid>Ingresa un Municipio.</CFormFeedback>
                       </CCol>
-                      <CCol md={6}>
+                      <CCol md={6} className=' mt-1 mb-1' >
                         <CFormLabel>Marca Carro</CFormLabel>
                         <CFormSelect
                           className="contactL-input"
@@ -531,8 +530,8 @@ const Register = () => {
                           }}
                         />
                         <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
-                      </CCol>
-                      <CCol md={6}>
+                      </CCol >
+                      <CCol md={6 } className=' mt-1 mb-1'>
                         <CFormLabel>Modelo</CFormLabel>
                         <CFormSelect
                           className="contactL-input"

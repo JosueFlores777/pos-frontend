@@ -299,6 +299,8 @@ function CardRecibo(props) {
     const [categoriaServicio, setCategoriaServicio] = useState([])
     const [tiposUnidades, settiposUnidades] = useState([])
     const [areaServicio, setAreaServicio] = useState([])
+    const [modelo, setModelo] = useState([])
+    const [marca, setMarca] = useState([])
     const [departamentoServicio, setDepartamentoServicio] = useState([])
     const [eliminarServicioId, setEliminarServicioId] = useState(0)
     const consultaCatalogo = async (rutaCatalogo) => {
@@ -314,6 +316,25 @@ function CardRecibo(props) {
         });
         return data;
     }
+    const estalecerModelos = async (id) => {
+
+        if (id > 0) {
+            var modelo = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
+
+            var modeloLista = modelo.lista;
+            let listamodelo = ["",];
+
+            modeloLista.forEach((element) => {
+                listamodelo.push({ value: element.id, label: element.nombre });
+            });
+
+            setModelo(listamodelo);
+
+        } else {
+            setState({ ...state, modeloId: 0, mostrarModelo: false, marcaId: 0 });
+        }
+    }
+
     const consultarTipos = async () => {
         let area = await consultaCatalogo(rutas.catalogos.areas);
         let descuento = await consultaCatalogo(rutas.catalogos.descuento);
@@ -322,6 +343,8 @@ function CardRecibo(props) {
         let tipoIdentificador = await consultaCatalogo(rutas.catalogos.tipoIdentificacion);
         let categoriaServicio = await consultaCatalogo(rutas.catalogos.categoria);
         let tipoUnidades = await consultaCatalogo(rutas.catalogos.unidadMedida);
+        let carro = await consultaCatalogo(rutas.catalogos.marcaCarro);
+
         setDescuentos(descuento);
         setIdentificadorCatalogos(tipoIdentificador);
         setRegionales(regionales);
@@ -715,6 +738,42 @@ function CardRecibo(props) {
                                         <CFormFeedback invalid>Ingresa una regional.</CFormFeedback>
                                     </CCol>
                                 </CRow>
+                                <CRow className="rowL  mt-3 mb-3">
+                                    <CCol >
+                                        <CFormLabel>Marca Carro</CFormLabel>
+                                        <CFormSelect
+                                            className="contactL-input"
+
+                                            required
+                                            options={marca}
+                                            id="marcaId"
+                                            value={state.marcaId}
+
+                                            onChange={e => {
+                                                estalecerModelos(e.target.value);
+                                                setState({ ...state, marcaId: e.target.value, mostrarModelo: true })
+
+                                            }}
+                                        />
+                                        <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
+                                    </CCol >
+                                    <CCol>
+                                        <CFormLabel>Modelo</CFormLabel>
+                                        <CFormSelect
+                                            className="contactL-input"
+                                            disabled={!state.mostrarModelo}
+                                            required
+                                            options={modelo}
+                                            id="modeloId"
+                                            value={state.modeloId}
+                                            onChange={e =>
+                                                setState({ ...state, modeloId: e.target.value })
+                                            }
+                                        />
+                                        <CFormFeedback invalid>Ingresa un Modelo.</CFormFeedback>
+                                    </CCol>
+
+                                </CRow>
                                 <CRow className=" mt-3">
                                     <CCol>
                                         <CButton onClick={() => buscarServicio()} className="btn-landing mt-4 mb-3 ">Servicios</CButton>
@@ -791,37 +850,6 @@ function CardRecibo(props) {
                                             }
                                         </CRow>
                                         <CRow className='ms-3 mt-1'>
-
-                                            {/* 
-<CCol sm={4}>
-    <CFormLabel className='textL'>Categoría</CFormLabel>
-    <CFormSelect
-        disabled={servicioLaboratorio}
-        className="contactL-input me-2"
-        options={categoriaServicio}
-        id="categoriaServicio"
-        value={recibo.categoriaServicio}
-        onChange={e => {
-            setRecibo({ ...recibo, categoriaServicio: e.target.value });
-        }}
-    />
-</CCol>
-*/}
-                                            {/* 
-<CCol sm={5}>
-    <CFormLabel className='textL'>Departamento</CFormLabel>
-    <CFormSelect
-        className="contactL-input me-2"
-        options={departamentoServicio}
-        id="departamentoServicio"
-        value={recibo.departamentoServicio}
-        onChange={e => {
-            setRecibo({ ...recibo, departamentoServicio: e.target.value });
-        }}
-    />
-</CCol>
-*/}
-
 
 
                                             <CCol md={1} className="mt-3 me-2" >
