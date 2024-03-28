@@ -162,7 +162,7 @@ const ReciboList = (props) => {
       },
     },
     { header: "Identificador", field: "identificacion" },
-    { header: "Razón Social", field: "nombreRazon" },
+    { header: "Razón", field: "nombreRazon" },
     {
       header: "Monto",
       render(row, props) {

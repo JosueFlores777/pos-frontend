@@ -267,7 +267,7 @@ const Dashboard = () => {
       },
     },
     { header: "Identificador", field: "identificacion" },
-    { header: "Nombre O Razón Social", field: "nombreRazon" },
+    { header: "Nombre O Razón", field: "nombreRazon" },
     {
       header: "Monto",
       render(row, props) {
@@ -310,7 +310,7 @@ const Dashboard = () => {
     { header: "Número Recibo", field: "id" },
 
     { header: "Identificador", field: "identificacion" },
-    { header: "Nombre O Razón Social", field: "nombreRazon" },
+    { header: "Nombre", field: "nombreRazon" },
     {
       header: "Area",
       render(row, props) {
@@ -694,7 +694,7 @@ const Dashboard = () => {
 
                         <CCol md={8}>
                           <CCardBody>
-                            <CCardTitle> <FaSearch className='mb-1' size={"15"} /> Buscar TGR-1</CCardTitle>
+                            <CCardTitle> <FaSearch className='mb-1' size={"15"} /> Buscar Recibo</CCardTitle>
                             <CCardText>
                               <CInputGroup className="mb-3 mt-3">
 

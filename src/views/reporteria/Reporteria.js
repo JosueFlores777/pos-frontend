@@ -184,8 +184,8 @@ const Reporteria = () => {
     }, [])
 
     const colDef2 = [
-        { header: "Número Recibo", field: "id" },
-        { header: "Nombre O Razón Social", field: "nombreRazon" },
+        { header: "Número", field: "id" },
+        { header: "Nombre", field: "nombreRazon" },
         {
             header: "Rubro",
             render(row, props) {
@@ -200,7 +200,7 @@ const Reporteria = () => {
             },
         },
         {
-            header: "Estado Senasa",
+            header: "Estado",
             render(row, props) {
                 if (row.estadoSenasaId == 6) {
                     return <CBadge className='bg-info-2' shape="rounded-pill" >Creado</CBadge>;
@@ -217,7 +217,7 @@ const Reporteria = () => {
             },
         },
         {
-            header: "Estado Sefin",
+            header: "Estado",
             render(row, props) {
                 if (row.estadoSefinId == 6) {
                     return <CBadge className='bg-info-2' shape="rounded-pill" >Creado</CBadge>;
@@ -351,7 +351,7 @@ const Reporteria = () => {
                         </CInputGroup>
                     </CCol>
                     <CCol sm={4}>
-                        <CFormLabel htmlFor="basic-url" className='text-muted'>Nombre o Razon Social</CFormLabel>
+                        <CFormLabel htmlFor="basic-url" className='text-muted'>Nombre</CFormLabel>
                         <CInputGroup className="mb-3 ms-1">
                             <CFormInput
                                 type='text'
