@@ -176,7 +176,7 @@ const Register = () => {
       setState({ ...state, identificador: valorModificado })
     } else if (state.tipoIdentificadorId == 3 && valorModificado.length <= 13) {
       //DNI
-      if (valorModificado.length != 13 && valorModificado.length <= 13) {
+      if (valorModificado.length != 5 && valorModificado.length <= 9) {
         setValidacionDNI(true);
       } else {
         setValidacionDNI(false);
