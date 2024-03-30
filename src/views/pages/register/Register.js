@@ -80,9 +80,10 @@ const Register = () => {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const Icon = React.createElement(FontAwesome[myIcons["Crear"]]);
   const estalecerMunicipios = async (id) => {
+
     if (id > 0) {
       var municipio = await service.apiAuth.get(rutas.catalogos.municipio + "/id-padre/" + id);
-
+      console.log("yersy",municipio);
       var municipioLista = municipio.lista;
       let listamunicipio = ["",];
       municipioLista.forEach((element) => {
@@ -165,18 +166,18 @@ const Register = () => {
   };
   const validarIdentificador = (e) => {
     let valorModificado = e.target.value;
-    if (state.tipoIdentificadorId == 5 && valorModificado.length <= 14) {
+    if (state.tipoIdentificadorId == 5 && valorModificado.length <= 13) {
       //RTN
-      if (valorModificado.length != 14 && valorModificado.length <= 13) {
+      if (valorModificado.length != 13 && valorModificado.length <= 13) {
         setValidacionRTN(true);
       } else {
 
         setValidacionRTN(false);
       }
       setState({ ...state, identificador: valorModificado })
-    } else if (state.tipoIdentificadorId == 3 && valorModificado.length <= 13) {
+    } else if (state.tipoIdentificadorId == 3 && valorModificado.length <= 9) {
       //DNI
-      if (valorModificado.length != 5 && valorModificado.length <= 9) {
+      if (valorModificado.length != 5 && valorModificado.length <= 8) {
         setValidacionDNI(true);
       } else {
         setValidacionDNI(false);
@@ -245,6 +246,8 @@ const Register = () => {
     var tipoIdentificador = await consultaCatalogo(rutas.catalogos.tipoIdentificacion);
     var tipoPersona = await consultaCatalogo(rutas.catalogos.tipoPersona);
     var marca = await consultaCatalogo(rutas.catalogos.marcaCarro);
+
+    console.log("test",depa);
     setDepartamento(depa);
     setNacionalidad(nacionalidad);
     setTipoIdentificador(tipoIdentificador);
@@ -263,7 +266,8 @@ const Register = () => {
         municipioid: parseInt(data.municipioId),
         nacionalidadId: parseInt(data.nacionalidadId),
         departamentoid: parseInt(data.departamentoId),
-
+        modeloId: parseInt(data.modeloId),
+        marcaId: parseInt(data.marcaId),
         telefono: data.telefono,
         correo: data.correo,
         direccion: data.direccion,
@@ -498,7 +502,9 @@ const Register = () => {
   
                           onChange={e => {
                             setState({ ...state, departamentoId: e.target.value, mostrarMunicipio: true })
-                            estalecerMunicipios(e.target.value);
+                            estalecerMunicipios(e.target.value)
+                            console.log( estalecerMunicipios(e.target.value));
+                            ;
                           }}
                         />
                         <CFormFeedback invalid>Ingresa un Departamento.</CFormFeedback>
