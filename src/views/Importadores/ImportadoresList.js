@@ -72,13 +72,13 @@ const Importadores = (props) => {
             render(row, props) {
                 return (
                     <div className='ms-1 btn-acciones'>
-                        <AuthGuard permiso="importador-ver">
-                            <Link to={"/importadores/gestionar/" + row.id} >
+                        <AuthGuard permiso="cliente-ver">
+                            <Link to={"/cliente/ver/" + row.id} >
                                 <AiOutlineEye color="#2278E5" size={22} className='ms-1 me-1 mb-1' />
                             </Link>
                         </AuthGuard>
-                        <AuthGuard permiso="importador-editar">
-                            <Link to={"/importadores/editar/" + row.id} >
+                        <AuthGuard permiso="cliente-editar">
+                            <Link to={"/cliente/editar/" + row.id} >
                                 <CIcon className='iconWarning  me-1 ms-1' icon={cilColorBorder} size="lg" />
                             </Link>
                         </AuthGuard>
@@ -181,7 +181,7 @@ const Importadores = (props) => {
                             <GridTable
                                 definicion={colDef}
                                 servicio={service.apiAuth}
-                                baseRoute={rutas.importador.importadoresCorreoVerificado}
+                                baseRoute={rutas.Cliente.importadoresCorreoVerificado}
                                 rootParms={props}
                                 pageSize={7}
                                 defaltQuery={state.defaltQuery}

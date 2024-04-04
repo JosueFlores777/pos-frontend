@@ -64,10 +64,10 @@ const routes = [
   { path: '/rol/editar/:id', name: 'Editar', element: RolEdit  },
   { path: '/rol/ver/:id', name: 'Ver', element: RolView  },
   
-  { path: '/importadores', name: 'Importadores', element: Importadores  },
-  { path: '/importadores/crear', name: 'Crear', element: ImportadoresCreate  },
-  { path: '/importadores/editar/:id', name: 'Editar', element: ImportadoresEdit  },
-  { path: '/importadores/gestionar/:id', name: 'Ver', element: ImportadoresView  },
+  { path: '/cliente', name: 'Cliente', element: Importadores  },
+  { path: '/cliente/crear', name: 'Crear', element: ImportadoresCreate  },
+  { path: '/cliente/editar/:id', name: 'Editar', element: ImportadoresEdit  },
+  { path: '/cliente/gestionar/:id', name: 'Ver', element: ImportadoresView  },
 
   { path: '/recibo', name: 'Recibo', element: Recibo  },
   { path: '/recibo/gestionar/:id', name: 'Editar', element: ReciboEdit  },

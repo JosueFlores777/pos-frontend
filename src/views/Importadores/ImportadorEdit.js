@@ -41,15 +41,15 @@ const ImportadorEdit = (props) => {
         }
 
         if(!rechazo){
-            await service.apiAuth.post(rutas.importador.invitar, request);
+            await service.apiAuth.post(rutas.Cliente.invitar, request);
             toast.success("Se ha invitado al usuario");
         }else{
-            await service.apiAuth.post(rutas.importador.rechazar, request);
+            await service.apiAuth.post(rutas.Cliente.rechazar, request);
             toast.warning("Se ha rechazado al usuario");
         }
         setLoading(true)
 
-        navigate("/importadores");
+        navigate("/cliente");
     }
 
     if (loading) {

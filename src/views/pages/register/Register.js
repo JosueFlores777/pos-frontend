@@ -83,7 +83,6 @@ const Register = () => {
 
     if (id > 0) {
       var municipio = await service.apiAuth.get(rutas.catalogos.municipio + "/id-padre/" + id);
-
       var municipioLista = municipio.lista;
       let listamunicipio = ["",];
       municipioLista.forEach((element) => {
@@ -246,7 +245,6 @@ const Register = () => {
     var tipoIdentificador = await consultaCatalogo(rutas.catalogos.tipoIdentificacion);
     var tipoPersona = await consultaCatalogo(rutas.catalogos.tipoPersona);
     var marca = await consultaCatalogo(rutas.catalogos.marcaCarro);
-
     setDepartamento(depa);
     setNacionalidad(nacionalidad);
     setTipoIdentificador(tipoIdentificador);
@@ -274,8 +272,10 @@ const Register = () => {
         tipoPersonaId: parseInt(data.tipoPersonaId),
         archivoId: data.archivoId
       }
+
+      console.log(request);
       setLoading(true)
-      await service.apiAuth.post(rutas.importador.solucitarAcceso, request);
+      await service.apiAuth.post(rutas.Cliente.solucitarAcceso, request);
 
       toast.success("Verifica Tu Correo Electronico");
       navigate("/");
