@@ -13,44 +13,78 @@ import { MdCleaningServices } from 'react-icons/md';
 import { AiOutlineEye, AiOutlineFieldTime } from "react-icons/ai";
 import { BsDownload } from "react-icons/bs";
 import FileDownload from "js-file-download";
+import { element } from 'prop-types';
+
+const obtenerNombreMarca = (idMarca, marcaList) => {
+  if (!marcaList) {
+    return "Desconocido";
+  }
+
+  const marcaEncontrada = marcaList.find(marca => marca.value === idMarca);
+
+  return marcaEncontrada ? marcaEncontrada.label : "Desconocido";
+};
+
+
+const obtenerModelos = async (idMarca) => {
+  if (idMarca > 0) {
+   console.log(idMarca);
+    const modelosResponse = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + idMarca);
+    const modelosLista = modelosResponse.lista;
+
+    const listaModelos = modelosLista.map(modelo => ({ value: modelo.id, label: modelo.nombre }));
+
+    return listaModelos;
+  } else {
+    return [];
+  }
+};
+
 
 const ReciboList = (props) => {
 
+
   const [state, setState] = useState(
     {
-      defaltQuery:"",
+      defaltQuery: "",
       numeroRecibo: "",
       estadoReciboSefin: 0,
       estadoReciboSenasa: 0,
-      busquedad:false,
+      busquedad: false,
     }
   );
+  const [marcaList, setMarcaList] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [estadosRecibo, setEstadosRecibo] = useState([]);
   const [estadosReciboSefin, setEstadosReciboSefin] = useState([]);
   const [estadosReciboSenasa, setEstadosReciboSenasa] = useState([]);
   const [moneda, setMoneda] = useState([]);
+  const [modelo, setModelo] = useState([])
+  const [marca, setMarca] = useState([])
+
+
+
   const usuario = useSelector((state) => state.usuario)
   useEffect(() => {
     consultarCatologos();
 
   }, [state.defaltQuery])
 
-  
+
 
   const buscar = () => {
-    
+
     if (state.numeroRecibo !== "" || state.estadoReciboSefin !== 0 || state.estadoReciboSenasa !== 0) {
       setState({
         ...state,
-        busquedad:true,
+        busquedad: true,
         defaltQuery: "numeroRecibo=" + (state.numeroRecibo == "" ? 0 : state.numeroRecibo) + "&idEstadoSefin=" + (state.estadoReciboSefin == "" ? 0 : state.estadoReciboSefin) + "&idEstadoSenasa=" + (state.estadoReciboSenasa == "" ? 0 : state.estadoReciboSenasa)
-        
+
       });
     } else {
       setState({
         ...state,
-        busquedad:true,
+        busquedad: true,
         defaltQuery: ""
       });
     }
@@ -63,7 +97,7 @@ const ReciboList = (props) => {
       numeroRecibo: "",
       estadoReciboSefin: "",
       estadoReciboSenasa: "",
-      busquedad:true,
+      busquedad: true,
     });
     setLoading(true);
 
@@ -102,7 +136,7 @@ const ReciboList = (props) => {
       }
     });
 
-    if(!state.busquedad){
+    if (!state.busquedad) {
       setState({
         ...state,
         estadoReciboSefin: 7,
@@ -115,6 +149,21 @@ const ReciboList = (props) => {
     setEstadosReciboSenasa(listaSenasa);
 
 
+
+    var marca = await service.apiBackend.get(rutas.catalogos.marcaCarro);
+    var marcaList = marca.lista;
+    let listMar = [""];
+    marcaList.forEach((element) => {
+      listMar.push({ value: element.id, label: element.nombre });
+    
+    });
+    setMarcaList(listMar);
+
+    
+
+
+
+
     var monedas = await service.apiBackend.get(rutas.catalogos.moneda);
 
     var monedaLista = monedas.lista;
@@ -125,6 +174,8 @@ const ReciboList = (props) => {
     setMoneda(listaM);
     setLoading(false);
   }
+
+  
   const colDef = [
     { header: "Número Recibo", field: "id" },
     // {
@@ -163,6 +214,16 @@ const ReciboList = (props) => {
     },
     { header: "Identificador", field: "identificacion" },
     { header: "Razón", field: "nombreRazon" },
+    
+    {
+      header: "Marca",
+      render(row, props) {
+        return obtenerNombreMarca(row.marcaId, marcaList);
+      }
+    },
+    { header: "Modelo",  render(row, props) {
+      return obtenerNombreMarca(row.modeloId, modelo);
+    } },
     {
       header: "Monto",
       render(row, props) {
@@ -263,7 +324,7 @@ const ReciboList = (props) => {
                 </CInputGroup>
               </CCol>
               <CCol md={3} >
-                
+
                 <CFormLabel>Estado Proceso</CFormLabel> {/* Estado Senasa */}
                 <CInputGroup className="mb-3 search-table ">
                   <CFormSelect
@@ -321,15 +382,15 @@ const ReciboList = (props) => {
             </CRow>
             <CRow >
               {!loading && (
-                  <GridTable
-                    definicion={colDef}
-                    servicio={service.apiBackend}
-                    baseRoute={rutas.recibo.base}
-                    rootParms={usuario}
-                    pageSize={7}
-                    defaltQuery={state.defaltQuery}
+                <GridTable
+                  definicion={colDef}
+                  servicio={service.apiBackend}
+                  baseRoute={rutas.recibo.base}
+                  rootParms={usuario}
+                  pageSize={7}
+                  defaltQuery={state.defaltQuery}
 
-                  />
+                />
               )}
             </CRow>
           </CCard>
