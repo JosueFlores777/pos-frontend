@@ -39,6 +39,7 @@ const DefaultLayout = () => {
     importador: cilAddressBook,
     servicio: cilFile,
     recibo: cilNewspaper,
+    
   }
   const example = 'dashboard';
 

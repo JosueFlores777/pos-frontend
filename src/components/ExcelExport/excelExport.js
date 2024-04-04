@@ -29,7 +29,7 @@ const ExportExcel = ({ fileName, fechaInicio, fechaFin, nombreRazon }) => {
 
         var dataResponse = await service.apiBackend.post(rutas.recibo.listaRecibosPorMes, request);
         dataResponse.recibos.forEach(element => {
-            console.log("recibo", element);
+
             var recibo = {
                 "No.": element.no,
                 "No. Recibo TGR1": element.recibo,

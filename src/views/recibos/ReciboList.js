@@ -101,7 +101,7 @@ const ReciboList = (props) => {
         listaSenasa.push({ value: element.id, label: element.nombre });
       }
     });
-    console.log("defaltQuery",state.defaltQuery);
+
     if(!state.busquedad){
       setState({
         ...state,
@@ -114,7 +114,7 @@ const ReciboList = (props) => {
     setEstadosReciboSefin(listaSefin);
     setEstadosReciboSenasa(listaSenasa);
 
-    console.log(listaSefin);
+
     var monedas = await service.apiBackend.get(rutas.catalogos.moneda);
 
     var monedaLista = monedas.lista;

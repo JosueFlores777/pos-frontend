@@ -83,7 +83,7 @@ const Register = () => {
 
     if (id > 0) {
       var municipio = await service.apiAuth.get(rutas.catalogos.municipio + "/id-padre/" + id);
-      console.log("yersy",municipio);
+
       var municipioLista = municipio.lista;
       let listamunicipio = ["",];
       municipioLista.forEach((element) => {
@@ -247,7 +247,6 @@ const Register = () => {
     var tipoPersona = await consultaCatalogo(rutas.catalogos.tipoPersona);
     var marca = await consultaCatalogo(rutas.catalogos.marcaCarro);
 
-    console.log("test",depa);
     setDepartamento(depa);
     setNacionalidad(nacionalidad);
     setTipoIdentificador(tipoIdentificador);
@@ -503,7 +502,7 @@ const Register = () => {
                           onChange={e => {
                             setState({ ...state, departamentoId: e.target.value, mostrarMunicipio: true })
                             estalecerMunicipios(e.target.value)
-                            console.log( estalecerMunicipios(e.target.value));
+           
                             ;
                           }}
                         />

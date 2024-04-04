@@ -79,6 +79,7 @@ const Dashboard = () => {
     let label = "";
 
     catalogo.forEach(element => {
+      
       if (element.value === id) {
 
         label = element.label
@@ -129,12 +130,12 @@ const Dashboard = () => {
   }, []);
 
   const consultaReporte = async (areasCatalogo, regionalCatalogo) => {
-    console.log(fechaInicio,fechaFin)
+
 
     var fechaInicioQ = fechaInicio;
     var fechaFinQ = fechaFin;
 
-
+    console.log(regionalCatalogo);
 
 
     if (usuario.tipoUsuario === "importador") {
@@ -166,10 +167,10 @@ const Dashboard = () => {
         areaId: (state.areaId != 0 ? state.areaId : areaId),
         regionalId: (state.regionalId != 0 ? state.regionalId : regionalId),
       }
-      console.log(request) ;
+
       var dataResponse = await service.apiBackend.post(rutas.recibo.reporteUsuario, request);
       var colorRecibos = setColor(dataResponse.porcentajeReciboPorProcesar);
-      console.log(dataResponse);
+
       setState({
         ...state, ...dataResponse,
         fechaInicio: fechaInicio,
@@ -191,7 +192,7 @@ const Dashboard = () => {
     let areas = await consultaCatalogoArea(rutas.catalogos.areas);
     setRegional(regionales);
     setDepartamentos(areas);
-
+    console.log("regioonales",regionales);
     if (fechaInicio != "" && fechaFin !== "") {
       consultaReporte(areas, regionales);
     }
