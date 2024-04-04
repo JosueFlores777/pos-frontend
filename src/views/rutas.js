@@ -4,29 +4,29 @@ export default {
   cerrarSession: "usuario/cerrar-session",
   catalogoDepartamentosSenasa: "/catalogo/departamento-senasa",
   rolesSinPaginar: "/rol/sinpaginar",
-  importador: {
-    base: "/importador",
-    getPorUsuario:"/importador/usuario",
-    getPorIdentificador:"/importador/identificador",
-    EditarImportador:"/importador/actualizar-importador",
-    gestionarAccesos:"/importador/gestionar-accesos",
-    invitar: "/importador/invitar",
-    rechazar: "/importador/rechazar",
-    importadoresCorreoVerificado: "/importador/lista",
-    solucitarAcceso:"/importador/solicitar-acceso",
-    verificarCorreo:"/importador/verificar-correo"
+  Cliente: {
+    base: "/cliente",
+    getPorUsuario: "/cliente/usuario",
+    getPorIdentificador: "/cliente/identificador",
+    EditarImportador: "/cliente/actualizar-cliente",
+    gestionarAccesos: "/cliente/gestionar-accesos",
+    invitar: "/cliente/invitar",
+    rechazar: "/cliente/rechazar",
+    importadoresCorreoVerificado: "/cliente/lista",
+    solucitarAcceso: "/cliente/solicitar-acceso",
+    verificarCorreo: "/cliente/verificar-correo"
   },
   catalogos: {
     paises: "/catalogo/pais",
     estados: "/catalogo/estado-recibo",
-    depto:"/catalogo/departamento",
-    municipio:"/catalogo/municipio",
-    tipoIdentificacion:"/catalogo/tipo-identificacion",
-    base:"/catalogo",
-    consultaPorid:"/catalogo/identificador",
-    tiposCatalogo:"/catalogo/tipos",
-    padresCatalogo:"/catalogo/padres",
-    departamentoSenasa:"/catalogo/departamento-senasa",
+    depto: "/catalogo/departamento",
+    municipio: "/catalogo/municipio",
+    tipoIdentificacion: "/catalogo/tipo-identificacion",
+    base: "/catalogo",
+    consultaPorid: "/catalogo/identificador",
+    tiposCatalogo: "/catalogo/tipos",
+    padresCatalogo: "/catalogo/padres",
+    departamentoSenasa: "/catalogo/departamento-senasa",
     areas: "/catalogo/area-servicio",
     descuento: "/catalogo/descuento",
     categoria: "/catalogo/categoria-servicio",
@@ -43,27 +43,27 @@ export default {
     modeloCarro: "/catalogo/carro-modelo",
   },
 
-  archivos:{
-    base:'/archivo',
-    registro:"/archivo/registro"
+  archivos: {
+    base: '/archivo',
+    registro: "/archivo/registro"
   },
 
-  recibo:{
-    base:"/recibo",
-    pdf:"/recibo/pdf",
-    reporteUsuario:"/recibo/reporteUsuarioExterno",
-    listaRecibosPorMes:"/recibo/listaRecibosPorMes",
-    anularRecibo:"/recibo/anular",
-    reporteUsuarioListado:"/recibo/gestionesActivas",
-    reportePDF:"recibo/pdf/reporte/",
+  recibo: {
+    base: "/recibo",
+    pdf: "/recibo/pdf",
+    reporteUsuario: "/recibo/reporteUsuarioExterno",
+    listaRecibosPorMes: "/recibo/listaRecibosPorMes",
+    anularRecibo: "/recibo/anular",
+    reporteUsuarioListado: "/recibo/gestionesActivas",
+    reportePDF: "recibo/pdf/reporte/",
   },
-  
-  modulosRoles:{
-    base:"/rol/modulos"
+
+  modulosRoles: {
+    base: "/rol/modulos"
   },
-  servicio:{
-    base:"/servicio",
-    
+  servicio: {
+    base: "/servicio",
+
   },
   usuarios: {
     base: "/usuario",

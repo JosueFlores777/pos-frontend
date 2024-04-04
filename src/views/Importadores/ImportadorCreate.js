@@ -29,10 +29,10 @@ const ImportadorCreate = (props) => {
             direccion: data.direccion,
         }
         setLoading(true)
-        await service.apiAuth.post(rutas.importador.base, request);
+        await service.apiAuth.post(rutas.Cliente.base, request);
        
         toast.success("Se ha creado el usuario-externo");
-        navigate("/importadores");
+        navigate("/cliente");
     }
 
     if (loading) {

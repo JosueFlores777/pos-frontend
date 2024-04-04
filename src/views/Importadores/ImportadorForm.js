@@ -376,7 +376,7 @@ const ImportadorForm = ({ onSubmit, ...props }) => {
                             <CRow className='mt-2'>
                                 <CCol>
                                     <div className="d-grid gap-2 d-md-flex justify-content-md-end ">
-                                        <Link to={"/importadores"} >
+                                        <Link to={"/cliente"} >
                                             <CButton className='me-md-2 btn-black' >Cancelar</CButton>
                                         </Link>
                                         {!props.soloLectura && (

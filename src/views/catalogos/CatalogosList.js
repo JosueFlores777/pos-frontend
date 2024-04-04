@@ -95,6 +95,8 @@ const CatalogoList = (props) => {
 
     const consultarTipos = async () => {
         var tipos = await service.apiBackend.get(rutas.catalogos.tiposCatalogo);
+
+        console.log(tipos);
         let lista = ["",];
         tipos.forEach((element) => {
             lista.push({ value: element, label: element });

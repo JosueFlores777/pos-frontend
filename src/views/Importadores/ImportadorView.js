@@ -25,7 +25,7 @@ const ImportadorView = (props) => {
 
     const consultarImportador = async () => {
         let importador = await service.apiAuth.get(
-            rutas.importador.base + "/" + id
+            rutas.Cliente.base + "/" + id
         );
         setState({ ...state, data: importador });
         setLoading(false)
