@@ -273,7 +273,6 @@ const Register = () => {
         archivoId: data.archivoId
       }
 
-      console.log(request);
       setLoading(true)
       await service.apiAuth.post(rutas.Cliente.solucitarAcceso, request);
 

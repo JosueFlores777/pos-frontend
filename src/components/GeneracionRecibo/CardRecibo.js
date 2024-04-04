@@ -175,6 +175,8 @@ function CardRecibo(props) {
 
             let request = {
                 identificacion: recibo.identificacion,
+                marcaId: recibo.marcaId,
+                modeloId: recibo.modeloId,
                 nombreRazon: recibo.nombreRazon,
                 montoTotal: montoTotal,
                 regionalId: recibo.regionalId,
@@ -331,7 +333,7 @@ function CardRecibo(props) {
             setModelo(listamodelo);
 
         } else {
-            setState({ ...state, modeloId: 0, mostrarModelo: false, marcaId: 0 });
+            setRecibo({ ...recibo, modeloId: 0, mostrarModelo: false, marcaId: 0 });
         }
     }
 
@@ -749,11 +751,11 @@ function CardRecibo(props) {
                                             required
                                             options={marca}
                                             id="marcaId"
-                                            value={state.marcaId}
+                                            value={recibo.marcaId}
 
                                             onChange={e => {
                                                 estalecerModelos(e.target.value);
-                                                setState({ ...state, marcaId: e.target.value, mostrarModelo: true })
+                                                setRecibo({ ...recibo, marcaId: e.target.value, mostrarModelo: true })
 
                                             }}
                                         />
@@ -763,13 +765,13 @@ function CardRecibo(props) {
                                         <CFormLabel>Modelo</CFormLabel>
                                         <CFormSelect
                                             className="contactL-input"
-                                            disabled={!state.mostrarModelo}
+                                            disabled={!recibo.mostrarModelo}
                                             required
                                             options={modelo}
                                             id="modeloId"
-                                            value={state.modeloId}
+                                            value={recibo.modeloId}
                                             onChange={e =>
-                                                setState({ ...state, modeloId: e.target.value })
+                                                setRecibo({ ...recibo, modeloId: e.target.value })
                                             }
                                         />
                                         <CFormFeedback invalid>Ingresa un Modelo.</CFormFeedback>

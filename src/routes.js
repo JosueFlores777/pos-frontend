@@ -10,7 +10,7 @@ const UsuarioEdit = React.lazy(() => import('./views/usuario/UsuarioEdit'))
 const UsuarioView = React.lazy(() => import('./views/usuario/UsuarioView'))
 const UsuarioEditStaff = React.lazy(() => import('./views/usuario/UsuarioEditStaff'))
 
-const Catalogos = React.lazy(() => import('./views/catalogos/CatalogosList'))
+const Catalogos = React.lazy(() => import('./views/catalogos/CatalogoList'))
 const CatalogoCreate = React.lazy(() => import('./views/catalogos/CatalogoCreate'))
 const CatalogoEdit = React.lazy(() => import('./views/catalogos/CatalogoEdit'))
 const CatalogoView = React.lazy(() => import('./views/catalogos/CatalogoView'))

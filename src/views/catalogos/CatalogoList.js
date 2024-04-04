@@ -96,7 +96,6 @@ const CatalogoList = (props) => {
     const consultarTipos = async () => {
         var tipos = await service.apiBackend.get(rutas.catalogos.tiposCatalogo);
 
-        console.log(tipos);
         let lista = ["",];
         tipos.forEach((element) => {
             lista.push({ value: element, label: element });
@@ -105,8 +104,9 @@ const CatalogoList = (props) => {
         return lista;
     }
     return (
-        <div className="animated fadeIn">
-            <CRow>
+        <>
+        
+        <CRow>
                 <CCol xl={12}>
                     <CCard className='border-0'>
                         <CCardBody>
@@ -208,7 +208,9 @@ const CatalogoList = (props) => {
                     </CCard>
                 </CCol>
             </CRow>
-        </div>
+
+        </>
+            
     )
 }
 

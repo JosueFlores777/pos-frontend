@@ -135,7 +135,6 @@ const Dashboard = () => {
     var fechaInicioQ = fechaInicio;
     var fechaFinQ = fechaFin;
 
-    console.log(regionalCatalogo);
 
 
     if (usuario.tipoUsuario === "importador") {
@@ -192,7 +191,6 @@ const Dashboard = () => {
     let areas = await consultaCatalogoArea(rutas.catalogos.areas);
     setRegional(regionales);
     setDepartamentos(areas);
-    console.log("regioonales",regionales);
     if (fechaInicio != "" && fechaFin !== "") {
       consultaReporte(areas, regionales);
     }
