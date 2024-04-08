@@ -13,7 +13,11 @@ import { Loader } from 'src/components';
 import moment from "moment";
 import { useNavigate } from 'react-router-dom';
 import Card from "../../components/ModalServicio/CardView"
+
+
+  
 const ReciboForm = ({ onSubmit, ...props }) => {
+
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [state, setState] = useState(
@@ -70,6 +74,8 @@ const ReciboForm = ({ onSubmit, ...props }) => {
     const [identificadorCatalogos, setIdentificadorCatalogos] = useState([])
     const [categoriaServicio, setCategoriaServicio] = useState([])
     const [regionales, setRegionales] = useState([])
+    const [modelo, setModelo] = useState([])
+    const [marca, setMarca] = useState([])
     const [servicios, setServicios] = useState([])
     const consultaCatalogo = async (rutaCatalogo) => {
         var dataResponse = await service.apiBackend.get(rutaCatalogo);
@@ -81,9 +87,14 @@ const ReciboForm = ({ onSubmit, ...props }) => {
         return data;
     }
     const consultarTipos = async () => {
+        
+        let marca = await service.apiBackend.get(rutas.catalogos.marcaCarro);
         let tipoIdentificador = await consultaCatalogo(rutas.catalogos.tipoIdentificacion);
         let categoriaServicio = await consultaCatalogo(rutas.catalogos.categoria);
         let regionalServicio = await consultaCatalogo(rutas.catalogos.regional);
+
+     
+        setMarca(marca);
         setIdentificadorCatalogos(tipoIdentificador);
         setRegionales(regionalServicio);
         setCategoriaServicio(categoriaServicio);
@@ -125,6 +136,8 @@ const ReciboForm = ({ onSubmit, ...props }) => {
     }
     const buscarCatalogoId = (catalogo, id) => {
         let label = "";
+        console.log(catalogo, id)
+
         catalogo.forEach(element => {
             if (element.value === id) {
                 label = element.label
@@ -254,7 +267,36 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                 </CCol>
 
                             </CRow>
+                            <CRow className="rowL mb-3">
+                                <CCol>
+                                    <CFormLabel className='textL' >Marca</CFormLabel>
+                                    <CFormInput
+                                       /* type="textL"
+                                        className="contactL-input"
+                                        disabled={props.soloLectura || props.editView}
+                                     
+                                        onChange={(e) => setState({ ...state, marca: e.target.value })  }
+                                        value={state.marca}
+                                        required*/
+                                    />
+                                    <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
+                                </CCol>
+                                <CCol >
+                                <CFormLabel className='textL'>Modelo</CFormLabel>
+                                    <CFormSelect
+                                        className="contactL-input"
+                                        options={identificadorCatalogos}
+                                        disabled={props.soloLectura || props.editView}
+                                        value={state.tipoIdentificadorId}
+                                        onChange={e => {
+                                            setState({ ...state, tipoIdentificadorId: e.target.value });
+                                        }}
+                                        required
+                                    />
+                                    <CFormFeedback invalid>Ingresa un tipo de identificacion.</CFormFeedback>
+                                </CCol>
 
+                            </CRow>
                             {(!props.editView && !props.soloLectura) && (
                                 <>
                                     <CRow>
@@ -314,6 +356,7 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                                                 <p><strong>Área: </strong> {state.AreaNombre}</p>
                                                             )}
                                                         </CCol>
+                                                   
                                                         <hr />
                                                     </CRow>
                                                     <CRow className="justify-content-start">

@@ -16,28 +16,12 @@ import FileDownload from "js-file-download";
 import { element } from 'prop-types';
 
 const obtenerNombreMarca = (idMarca, marcaList) => {
+
   if (!marcaList) {
     return "Desconocido";
   }
-
   const marcaEncontrada = marcaList.find(marca => marca.value === idMarca);
-
   return marcaEncontrada ? marcaEncontrada.label : "Desconocido";
-};
-
-
-const obtenerModelos = async (idMarca) => {
-  if (idMarca > 0) {
-   console.log(idMarca);
-    const modelosResponse = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + idMarca);
-    const modelosLista = modelosResponse.lista;
-
-    const listaModelos = modelosLista.map(modelo => ({ value: modelo.id, label: modelo.nombre }));
-
-    return listaModelos;
-  } else {
-    return [];
-  }
 };
 
 
@@ -53,23 +37,48 @@ const ReciboList = (props) => {
       busquedad: false,
     }
   );
-  const [marcaList, setMarcaList] = useState([]); 
+  const [marcaList, setMarcaList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [estadosRecibo, setEstadosRecibo] = useState([]);
   const [estadosReciboSefin, setEstadosReciboSefin] = useState([]);
   const [estadosReciboSenasa, setEstadosReciboSenasa] = useState([]);
   const [moneda, setMoneda] = useState([]);
-  const [modelo, setModelo] = useState([])
-  const [marca, setMarca] = useState([])
+  const [modelosPorId, setModelosPorId] = useState({});
+  const [modelosCargados, setModelosCargados] = useState(false);
 
+  const consultarModelosPorMarca = async () => {
+    try {
+      const marcasResponse = await service.apiBackend.get(rutas.catalogos.marcaCarro);
+      const marcasLista = marcasResponse.lista;
+      const modelosPorMarca = {};
+      for (const marca of marcasLista) {
+        const modelosResponse = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + marca.id);
+        const modelosLista = modelosResponse.lista;
+        for (const modelo of modelosLista) {
+          modelosPorMarca[modelo.id] = modelo.nombre;
+        }
+      }
+      setModelosPorId(modelosPorMarca);
+      setModelosCargados(true);
+    } catch (error) {
+      console.error("Error al obtener modelos por marca:", error);
+    }
+  };
 
+  const cargarDatos = async () => {
+    try {
+      await Promise.all([consultarCatologos(), consultarModelosPorMarca()]);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error al cargar datos:", error);
+    }
+  };
 
   const usuario = useSelector((state) => state.usuario)
   useEffect(() => {
     consultarCatologos();
-
+    consultarModelosPorMarca()
   }, [state.defaltQuery])
-
 
 
   const buscar = () => {
@@ -155,11 +164,11 @@ const ReciboList = (props) => {
     let listMar = [""];
     marcaList.forEach((element) => {
       listMar.push({ value: element.id, label: element.nombre });
-    
+
     });
     setMarcaList(listMar);
 
-    
+
 
 
 
@@ -175,7 +184,7 @@ const ReciboList = (props) => {
     setLoading(false);
   }
 
-  
+
   const colDef = [
     { header: "Número Recibo", field: "id" },
     // {
@@ -214,16 +223,18 @@ const ReciboList = (props) => {
     },
     { header: "Identificador", field: "identificacion" },
     { header: "Razón", field: "nombreRazon" },
-    
     {
       header: "Marca",
       render(row, props) {
         return obtenerNombreMarca(row.marcaId, marcaList);
       }
     },
-    { header: "Modelo",  render(row, props) {
-      return obtenerNombreMarca(row.modeloId, modelo);
-    } },
+    {
+      header: "Modelo",
+      render(row, props) {
+        const nombreModelo = modelosPorId[row.modeloId] || "Desconocido";
+        return nombreModelo;}
+    },
     {
       header: "Monto",
       render(row, props) {
@@ -283,6 +294,8 @@ const ReciboList = (props) => {
   return (
 
     <div className="animated fadeIn">
+       {modelosCargados ? (
+        <>
       <CRow>
         <CCol xl={12}>
           <CCard className='border-0'>
@@ -396,6 +409,10 @@ const ReciboList = (props) => {
           </CCard>
         </CCol>
       </CRow>
+      </>
+        ) : (
+          <div>{loading}</div>
+        )}
     </div>
   )
 }
