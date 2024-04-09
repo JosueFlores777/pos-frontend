@@ -90,23 +90,23 @@ const ReciboForm = ({ onSubmit, ...props }) => {
         });
         return data;
     }
-    const estalecerModelos = async (id) => {
+    const establecerModelos = async (id) => {
         if (id > 0) {
-            var modelo = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
-
-            var modeloLista = modelo.lista;
-            let listamodelo = ["",];
-
+            const modeloResponse = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
+            const modeloLista = modeloResponse.lista;
+            let listaModelo = [];
             modeloLista.forEach((element) => {
-                listamodelo.push({ value: element.nombre, label: element.nombre });
+                listaModelo.push({ value: element.id, label: element.nombre });
             });
-
-            setModelo(listamodelo);
-
+            setModelo(listaModelo);
         } else {
-            setState({ ...state, modeloId: 0, mostrarModelo: false, marcaId: 0 });
+            setModelo([]);
         }
-    }
+    };
+
+    useEffect(() => {
+        establecerModelos(state.marcaId); 
+    }, [state.marcaId]); 
 
     const consultarTipos = async () => {
         let modelo = await service.apiBackend.get(rutas.catalogos.modeloCarro);
@@ -266,7 +266,7 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                             </CRow>
                             <CRow className="rowL mb-3">
                                 <CCol>
-                                    <CFormLabel className='textL' >Nombre o Razón Social</CFormLabel>
+                                    <CFormLabel className='textL' >Nombre o Razón</CFormLabel>
                                     <CFormInput
                                         type="textL"
                                         className="contactL-input"
