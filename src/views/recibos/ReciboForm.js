@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from "../../components/ModalServicio/CardView"
 
 
-  
+
 const ReciboForm = ({ onSubmit, ...props }) => {
 
     const navigate = useNavigate();
@@ -33,8 +33,11 @@ const ReciboForm = ({ onSubmit, ...props }) => {
             servicio: [],
             categoriaId: "",
             comentario: "",
+            marcaId: "",
+            modeloId: "",
         }
     )
+
     const [solicitud, setsolicitud] = useState(false);
     const [servicio, setServicio] = useState({
         nombreServicio: "",
@@ -52,20 +55,20 @@ const ReciboForm = ({ onSubmit, ...props }) => {
 
     const Icon = React.createElement(FontAwesome[myIcons[props.accion]]);
 
-    const validate = (event,regionalBool) => {
+    const validate = (event, regionalBool) => {
         const form = event.currentTarget
         if (form.checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
         }
         setValidated(true)
-        if(regionalBool){
-            onSubmit(state,regionalBool);
+        if (regionalBool) {
+            onSubmit(state, regionalBool);
         }
         else if (state.comentario !== "") {
-            onSubmit(state,regionalBool);
+            onSubmit(state, regionalBool);
         }
-        
+
 
     }
     const [validated, setValidated] = useState(false);
@@ -74,8 +77,8 @@ const ReciboForm = ({ onSubmit, ...props }) => {
     const [identificadorCatalogos, setIdentificadorCatalogos] = useState([])
     const [categoriaServicio, setCategoriaServicio] = useState([])
     const [regionales, setRegionales] = useState([])
-    const [modelo, setModelo] = useState([])
-    const [marca, setMarca] = useState([])
+    const [modelos, setModelo] = useState([])
+    const [marcas, setMarcas] = useState([]);
     const [servicios, setServicios] = useState([])
     const consultaCatalogo = async (rutaCatalogo) => {
         var dataResponse = await service.apiBackend.get(rutaCatalogo);
@@ -83,18 +86,38 @@ const ReciboForm = ({ onSubmit, ...props }) => {
         let data = ["",];
         dataResponseList.forEach((element) => {
             data.push({ value: element.id, label: element.nombre });
+
         });
         return data;
     }
+    const estalecerModelos = async (id) => {
+        if (id > 0) {
+            var modelo = await service.apiBackend.get(rutas.catalogos.modeloCarro + "/id-padre/" + id);
+
+            var modeloLista = modelo.lista;
+            let listamodelo = ["",];
+
+            modeloLista.forEach((element) => {
+                listamodelo.push({ value: element.nombre, label: element.nombre });
+            });
+
+            setModelo(listamodelo);
+
+        } else {
+            setState({ ...state, modeloId: 0, mostrarModelo: false, marcaId: 0 });
+        }
+    }
+
     const consultarTipos = async () => {
-        
-        let marca = await service.apiBackend.get(rutas.catalogos.marcaCarro);
+        let modelo = await service.apiBackend.get(rutas.catalogos.modeloCarro);
+        console.log(modelo);
+        let marcas = await consultaCatalogo(rutas.catalogos.marcaCarro);
         let tipoIdentificador = await consultaCatalogo(rutas.catalogos.tipoIdentificacion);
         let categoriaServicio = await consultaCatalogo(rutas.catalogos.categoria);
         let regionalServicio = await consultaCatalogo(rutas.catalogos.regional);
 
-     
-        setMarca(marca);
+
+        setMarcas(marcas);
         setIdentificadorCatalogos(tipoIdentificador);
         setRegionales(regionalServicio);
         setCategoriaServicio(categoriaServicio);
@@ -269,31 +292,33 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                             </CRow>
                             <CRow className="rowL mb-3">
                                 <CCol>
-                                    <CFormLabel className='textL' >Marca</CFormLabel>
-                                    <CFormInput
-                                       /* type="textL"
-                                        className="contactL-input"
-                                        disabled={props.soloLectura || props.editView}
-                                     
-                                        onChange={(e) => setState({ ...state, marca: e.target.value })  }
-                                        value={state.marca}
-                                        required*/
-                                    />
-                                    <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
-                                </CCol>
-                                <CCol >
-                                <CFormLabel className='textL'>Modelo</CFormLabel>
+                                    <CFormLabel className='textL'>Marca</CFormLabel>
                                     <CFormSelect
                                         className="contactL-input"
-                                        options={identificadorCatalogos}
+                                        options={marcas}
                                         disabled={props.soloLectura || props.editView}
-                                        value={state.tipoIdentificadorId}
+                                        value={state.marcaId}
                                         onChange={e => {
-                                            setState({ ...state, tipoIdentificadorId: e.target.value });
+                                            setState({ ...state, marcaId: e.target.value });
                                         }}
                                         required
                                     />
-                                    <CFormFeedback invalid>Ingresa un tipo de identificacion.</CFormFeedback>
+                                    <CFormFeedback invalid>Ingresa una marca.</CFormFeedback>
+                                </CCol>
+
+                                <CCol >
+                                    <CFormLabel className='textL'>Modelo</CFormLabel>
+                                    <CFormSelect
+                                        className="contactL-input"
+                                        options={modelos} 
+                                        disabled={props.soloLectura || props.editView}
+                                        value={state.modeloId} 
+                                        onChange={e => {
+                                            setState({ ...state, modeloId: e.target.value });
+                                        }}
+                                        required
+                                    />
+                                    <CFormFeedback invalid>Ingresa un modelo.</CFormFeedback>
                                 </CCol>
 
                             </CRow>
@@ -356,7 +381,7 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                                                 <p><strong>Área: </strong> {state.AreaNombre}</p>
                                                             )}
                                                         </CCol>
-                                                   
+
                                                         <hr />
                                                     </CRow>
                                                     <CRow className="justify-content-start">
@@ -429,8 +454,8 @@ const ReciboForm = ({ onSubmit, ...props }) => {
 
                                         {!props.soloLectura && state.estadoSefinId === 7 && (
                                             <>
-                                                <CButton className='btn-yellow' onClick={(e) => validate(e,true)}  > Editar Regional Recibo  </CButton>
-                                                <CButton className='btn-blue' onClick={(e) => validate(e,false)}  >{Icon}  {props.accion} Recibo  </CButton>
+                                                <CButton className='btn-yellow' onClick={(e) => validate(e, true)}  > Editar Regional Recibo  </CButton>
+                                                <CButton className='btn-blue' onClick={(e) => validate(e, false)}  >{Icon}  {props.accion} Recibo  </CButton>
                                             </>
 
                                         )}
