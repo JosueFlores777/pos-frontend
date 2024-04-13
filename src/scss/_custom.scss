@@ -51,7 +51,7 @@
   }
 
   &:active {
-    background-color: #01BDE2;
+    background-color: #AC2B39;
     color: whitesmoke;
 
     .nav-icon {
@@ -61,7 +61,7 @@
 }
 
 .sidebar-nav .nav-link.active {
-  background-color: #01BDE2;
+  background-color: #AC2B39;
   color: whitesmoke;
 
   .nav-icon {
@@ -109,7 +109,7 @@
 }
 
 .breadcrumb-item a {
-  color: #01BDE2;
+  color: #AC2B39;
   text-decoration: none;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .aFooter {
-  color: #01BDE2;
+  color: #AC2B39;
   text-decoration: none;
 }
 
@@ -523,11 +523,11 @@
 }
 .btn-blue {
 
-  --cui-btn-shadow: #00BEE4;
+  --cui-btn-shadow: #AC2B39;
   font-weight: 500;
   color: #F7F7F7;
-  background-color: #01BDE2;
-  border: 1px solid #00BEE4;
+  background-color: #AC2B39;
+  border: 1px solid #782331;
   text-decoration: none !important;
 
   display: flex;

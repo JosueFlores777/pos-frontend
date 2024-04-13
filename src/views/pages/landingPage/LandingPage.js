@@ -17,11 +17,6 @@ const Login = (props) => {
   const reqSvgs = require.context('../../../assets/landingPage/shapes', false, /.png$/);
   const allSvgFilepaths = reqSvgs.keys();
 
-  useEffect(() => {
-    consultarTipos();
-  }, [])
-
-
   const [state, setState] = useState(
     {
       areaId: 0,
@@ -70,13 +65,7 @@ const Login = (props) => {
               </div>
               <div className="linksL">
                 <ul>
-                  <li className='me-4 ms-1'>
-                    <LinkScroll to={"support"}>
-                      <a className="">Soporte Técnico</a>
-                    </LinkScroll>
-                  </li>
                   <li className='me-1 ms-1'>
-
                     <Link to={"/register"} >
                       <a className="">Registrarse</a>
                     </Link>
