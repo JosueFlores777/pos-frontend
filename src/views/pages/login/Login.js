@@ -204,9 +204,6 @@ const Login = () => {
                 </CCol>
                 
               </CRow>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <img alt='Logo Usaid' src={logoUsaid} className="img-fluid d-block  mx-auto mb-4 position-absolute bottom-0 start-50 translate-middle-x" style={{ width: 170 + "px" }}></img>
-              </div>
             </CContainer>
           </div>
         )}
