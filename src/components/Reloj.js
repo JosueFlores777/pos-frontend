@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { CCard, CCardTitle, CPlaceholder, CSpinner } from '@coreui/react';
-import relojBg from "../assets/images/relojBg.png"
 import { BsCalendar3 } from "react-icons/bs"
 function Clock() {
   const [miniLoading, setMiniLoading] = useState(true);

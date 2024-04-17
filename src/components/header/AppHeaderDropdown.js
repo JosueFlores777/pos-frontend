@@ -23,7 +23,7 @@ import rutas from "../../views/rutas";
 import { useNavigate } from 'react-router-dom'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import * as actions from "../../redux/actions/usuario";
-import avatar8 from './../../assets/images/avatars/3.png'
+
 import { FaUserTie } from 'react-icons/fa';
 import { AiFillCaretDown } from 'react-icons/ai';
 import AuthGuard from "../../seguridad";

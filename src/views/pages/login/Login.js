@@ -20,8 +20,6 @@ import logo from "../../../assets/landingPage/logo.png"
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import * as actions from "../../../redux/actions/usuario";
-import logoUsaid from "../../../assets/brand/logoUsaid.png";
-import loginFondo from "../../../assets/brand/login2.png";
 import logoH from "../../../assets/brand/escudoH333.png";
 
 const Login = () => {

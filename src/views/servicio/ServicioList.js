@@ -279,7 +279,7 @@ const CatalogoList = (props) => {
                                 servicio={service.apiBackend}
                                 baseRoute={rutas.servicio.base}
                                 rootParms={props}
-                                pageSize={5}
+                                pageSize={7}
                                 defaltQuery={state.defaltQuery}
                             ></GridTable>
                         </CRow>

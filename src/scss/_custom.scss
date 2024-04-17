@@ -537,27 +537,27 @@
   transition: 0.1s ease-in-out;
 
   &:hover {
-    border-color: #00BEE4;
+    border-color: #420F16;
     color: #F7F7F7;
     box-shadow: 3px 5px 7px #333;
-    background-color: #01BDE2;
+    background-color: #420F16;
   }
 
   &:focus {
-    border-color: #00BEE4;
+    border-color: #420F16;
     color: #F7F7F7;
     box-shadow: none;
-    background-color: #00BEE4;
+    background-color: #420F16;
 
     &:hover {
-      border-color: #00BEE4;
+      border-color: #420F16;
       color: #F7F7F7;
       box-shadow: 3px 5px 7px #333;
-      background-color: #01BDE2;
+      background-color: #420F16;
 
       &:active {
-        border-color: #00BEE4;
-        color: #00BEE4;
+        border-color: #420F16;
+        color: #420F16;
         box-shadow: 3px 5px 7px #333;
         background-color: #F7F7F7;
       }
@@ -971,7 +971,7 @@
   }
 
   &:hover {
-    background: #01BDE2;
+    background: #AC2B39;
     border-color: #eee;
     color: #eee;
 
@@ -1023,7 +1023,7 @@
 }
 
 .table-striped>tbody>tr:nth-of-type(odd)>* {
-  --cui-table-accent-bg: #f6fcfe;
+  --cui-table-accent-bg: #FDF3F3;
   color: var(--cui-table-striped-color);
 }
 
@@ -1060,7 +1060,7 @@
   text-decoration: none;
 
   &:hover {
-    color: #01BDE2 !important;
+    color: #AC2B39 !important;
   }
 
   -webkit-touch-callout: none;
@@ -1079,7 +1079,7 @@
   text-decoration: none;
 
   &:hover {
-    color: #01BDE2 !important;
+    color: #AC2B39 !important;
   }
 
   -webkit-touch-callout: none;
@@ -1110,14 +1110,14 @@
 
   &:hover {
     color: white !important;
-    background-color: #01BDE2;
+    background-color: #AC2B39;
   }
 }
 
 
 .paginationActive a {
   color: white !important;
-  background-color: #01BDE2;
+  background-color: #AC2B39;
 }
 
 .paginationBttns .paginationDisabled a {
@@ -1157,7 +1157,7 @@
 //tree
 
 html:not([dir=rtl]) .callout-primary {
-  border-left-color: #01BDE2;
+  border-left-color: #AC2B39;
 }
 
 .btn-secondary {
@@ -1254,13 +1254,13 @@ html:not([dir=rtl]) .callout-primary {
   --cui-alert-border-color: #F5F7FA;
 }
 .btn-ghost-primary {
-  --cui-btn-color: #01BDE2;
+  --cui-btn-color: #AC2B39;
   --cui-btn-hover-bg: #F7F7F7;
   --cui-btn-hover-border-color: #F7F7F7;
   --cui-btn-hover-color: #000015;
   --cui-btn-active-bg: #F7F7F7;
   --cui-btn-active-border-color: #F7F7F7;
   --cui-btn-active-color: #000015;
-  --cui-btn-disabled-color: #01BDE2;
+  --cui-btn-disabled-color: #AC2B39;
   --cui-btn-shadow: rgba(255, 255, 255, 0);
 }
