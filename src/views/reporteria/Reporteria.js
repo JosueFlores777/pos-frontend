@@ -239,7 +239,7 @@ const Reporteria = () => {
                 return (
                     <div>
                         {
-                            <p> {buscarCatalogoId(moneda, row.detalleRecibos[0].servicio.monedaId)}{"L. "} {((Math.round(row.montoTotal * 100) / 100).toFixed(2))} </p>
+                            <p> {buscarCatalogoId(moneda, row.detalleRecibos[0].servicio.monedaId)}{"$. "} {((Math.round(row.montoTotal * 100) / 100).toFixed(2))} </p>
                         }
                     </div>
                 );
