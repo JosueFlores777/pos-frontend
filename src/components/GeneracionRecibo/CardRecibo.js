@@ -14,6 +14,8 @@ import { cilTrash } from '@coreui/icons';
 import { MdCleaningServices } from 'react-icons/md';
 import CardsContainers from "../ModalServicio/CardsContainers"
 import { Loader } from 'src/components';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 function CardRecibo(props) {
     const usuario = useSelector((state) => state.usuario)
     const [loading, setLoading] = useState(true);
@@ -96,7 +98,8 @@ function CardRecibo(props) {
         descuento: false,
 
     });
-    const [isImportador, setIsImportador] = useState(false);
+    const [isImportador, setIsImportador] = useState(false)
+    const [startDate, setStartDate] = useState(new Date());
     const [montoFijo, setMontoFijo] = useState(0);
     const [aplicoDescuento, setAplicoDescuento] = useState(false);
     const [isConfirmed, setIsConfirmed] = useState(false);
@@ -178,6 +181,7 @@ function CardRecibo(props) {
                 marcaId: recibo.marcaId,
                 modeloId: recibo.modeloId,
                 nombreRazon: recibo.nombreRazon,
+                fechaPrestacionServicio: startDate,
                 montoTotal: montoTotal,
                 regionalId: recibo.regionalId,
                 monedaId: servicio.monedaId,
@@ -776,6 +780,17 @@ function CardRecibo(props) {
                                         />
                                         <CFormFeedback invalid>Ingresa un Modelo.</CFormFeedback>
                                     </CCol>
+
+                                </CRow>
+                                <CRow className="rowL  mt-3 mb-3">
+                                    <CCol >
+                                        <CFormLabel>Fecha y Hora</CFormLabel>
+                                        <br></br>
+                                        <DatePicker className='contactL-input' selected={startDate} onChange={(date) => setStartDate(date)} />
+
+                                        <CFormFeedback invalid>Ingresa un Marca.</CFormFeedback>
+                                    </CCol >
+ 
 
                                 </CRow>
                                 <CRow className=" mt-3">

@@ -27,6 +27,7 @@ const ReciboForm = ({ onSubmit, ...props }) => {
             categoriaServicio: "",
             identificacion: "",
             nombreRazon: "",
+            fechaPrestacionServicio: "",
             montoTotal: "",
             servicioId: "",
             tipoIdentificadorId: "",
@@ -71,12 +72,20 @@ const ReciboForm = ({ onSubmit, ...props }) => {
 
 
     }
+
+    const setPay = async () => {
+
+        await service.apiBackend.put(rutas.recibo.base + "/pagar/" + state.id);
+
+        window.location.reload();
+    }
     const [validated, setValidated] = useState(false);
     const [visibleLg, setVisibleLg] = useState(false);
     const [mostrarServicio, setMostrarServicio] = useState(false)
     const [identificadorCatalogos, setIdentificadorCatalogos] = useState([])
     const [categoriaServicio, setCategoriaServicio] = useState([])
     const [regionales, setRegionales] = useState([])
+    const [excusas, setExcusas] = useState([])
     const [modelos, setModelo] = useState([])
     const [marcas, setMarcas] = useState([]);
     const [servicios, setServicios] = useState([])
@@ -105,18 +114,18 @@ const ReciboForm = ({ onSubmit, ...props }) => {
     };
 
     useEffect(() => {
-        establecerModelos(state.marcaId); 
-    }, [state.marcaId]); 
+        establecerModelos(state.marcaId);
+    }, [state.marcaId]);
 
     const consultarTipos = async () => {
+
         let modelo = await service.apiBackend.get(rutas.catalogos.modeloCarro);
-        console.log(modelo);
         let marcas = await consultaCatalogo(rutas.catalogos.marcaCarro);
         let tipoIdentificador = await consultaCatalogo(rutas.catalogos.tipoIdentificacion);
         let categoriaServicio = await consultaCatalogo(rutas.catalogos.categoria);
         let regionalServicio = await consultaCatalogo(rutas.catalogos.regional);
-
-
+        let excusas = await consultaCatalogo(rutas.catalogos.excusas);
+        setExcusas(excusas);
         setMarcas(marcas);
         setIdentificadorCatalogos(tipoIdentificador);
         setRegionales(regionalServicio);
@@ -159,7 +168,7 @@ const ReciboForm = ({ onSubmit, ...props }) => {
     }
     const buscarCatalogoId = (catalogo, id) => {
         let label = "";
-        console.log(catalogo, id)
+
 
         catalogo.forEach(element => {
             if (element.value === id) {
@@ -179,6 +188,8 @@ const ReciboForm = ({ onSubmit, ...props }) => {
     useEffect(() => {
 
         const overridenData = props.overridenData ?? {};
+
+        console.log("a", overridenData)
         if (props.overridenData) {
 
             overridenData.detalleRecibos.forEach(element => {
@@ -310,9 +321,9 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                     <CFormLabel className='textL'>Modelo</CFormLabel>
                                     <CFormSelect
                                         className="contactL-input"
-                                        options={modelos} 
+                                        options={modelos}
                                         disabled={props.soloLectura || props.editView}
-                                        value={state.modeloId} 
+                                        value={state.modeloId}
                                         onChange={e => {
                                             setState({ ...state, modeloId: e.target.value });
                                         }}
@@ -322,6 +333,24 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                 </CCol>
 
                             </CRow>
+                            {state.estadoSefinId === 7 && (
+
+                                <CCol >
+                                    <CFormLabel className='textL' >Estado Servicio</CFormLabel>
+                                    <CFormSelect
+                                        className="contactL-input"
+                                        defaultValue={13922}
+                                        options={excusas}
+                                        value={state.excusaId}
+                                        onChange={(e) => setState({ ...state, excusaId: e.target.value })}
+                                        required
+                                    />
+                                    <CFormFeedback invalid>Ingresa un estado.</CFormFeedback>
+                                </CCol>
+                            )
+
+                            }
+
                             {(!props.editView && !props.soloLectura) && (
                                 <>
                                     <CRow>
@@ -396,6 +425,11 @@ const ReciboForm = ({ onSubmit, ...props }) => {
                                                             )}
                                                         </CCol>
                                                         <CCol xs={3}>
+                                                            {state.fechaPago !== "0001-01-01T00:00:00" && (
+                                                                <p><strong>Fecha de Servicio: </strong> {moment(state.fechaPrestacionServicio).format("DD-MM-YYYY")}</p>
+                                                            )}
+                                                        </CCol>
+                                                        <CCol xs={3}>
                                                             {state.fechaUtilizado !== "0001-01-01T00:00:00" && (
                                                                 <p><strong>Fecha Utilizado: </strong> {moment(state.fechaUtilizado).format("DD-MM-YYYY")}</p>
                                                             )}
@@ -454,8 +488,17 @@ const ReciboForm = ({ onSubmit, ...props }) => {
 
                                         {!props.soloLectura && state.estadoSefinId === 7 && (
                                             <>
-                                                <CButton className='btn-yellow' onClick={(e) => validate(e, true)}  > Editar Regional Recibo  </CButton>
+                                                <CButton className='btn-yellow' onClick={(e) => validate(e, true)}  > Gestionar </CButton>
+
                                                 <CButton className='btn-blue' onClick={(e) => validate(e, false)}  >{Icon}  {props.accion} Recibo  </CButton>
+                                            </>
+
+                                        )}
+                                        {!props.soloLectura && state.estadoSefinId === 6 && (
+                                            <>
+
+                                                <CButton className='btn-green' onClick={(e) => setPay()}  > Procesar a Pagado  </CButton>
+
                                             </>
 
                                         )}

@@ -33,6 +33,7 @@ export default {
     tipoServicio: "/catalogo/tipo-servicio",
     moneda: "/catalogo/moneda",
     regional: "/catalogo/regional",
+    excusas: "/catalogo/excusa",
     tipoCobro: "/catalogo/tipo-cobro",
     tipoPersona: "/catalogo/tipo-persona",
     departamentoServicio: "/catalogo/departamento-servicio",

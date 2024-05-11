@@ -31,6 +31,7 @@ const ReciboEdit = (props) => {
         let recibo = await service.apiBackend.get(
             rutas.recibo.base + "/" + id
         );
+        console.log("recibo",recibo);
         recibo.servicio = recibo.detalleRecibos[0].servicio;
         var regionalCatalogo = await service.apiBackend.get(rutas.catalogos.regional);
         recibo.regionalNombre = buscarCatalogoId(regionalCatalogo.lista, recibo.regionalId);
@@ -60,6 +61,7 @@ const ReciboEdit = (props) => {
             id: data.id,
             identificacion: data.identificacion,
             nombreRazon: data.nombreRazon,
+            excusaId:data.excusaId,
             servicioId: data.servicioId,
             montoTotal: (data.servicio.monto == null ? data.montoTotal : data.servicio.monto),
             tipoIdentificadorId: data.tipoIdentificadorId,
